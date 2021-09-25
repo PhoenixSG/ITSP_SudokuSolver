@@ -101,14 +101,17 @@ public class S5 extends AppCompatActivity implements View.OnClickListener{
     void GridColorChange(int i, int j){
         for(int k=0;k<9;k++) {
             for(int l=0;l<9;l++) {
+                if(unsolved[k][l] != 0) continue ;
                 if((k/3+l/3)%2==0) sdg_block[k][l].setImageResource(R.drawable.block1);
                 else sdg_block[k][l].setImageResource(R.drawable.block2);
             }
         }
         for(int k=0;k<9;k++) {
+            if(unsolved[k][j] != 0) continue ;
             sdg_block[k][j].setImageResource(R.drawable.block5);
         }
         for(int l=0;l<9;l++) {
+            if(unsolved[i][l] != 0) continue ;
             sdg_block[i][l].setImageResource(R.drawable.block5);
         }
         sdg_block[i][j].setImageResource(R.drawable.block7);
@@ -436,6 +439,7 @@ public class S5 extends AppCompatActivity implements View.OnClickListener{
                     predefined_numbers[i][j] = true;
                     sudokugrid[i][j].setTextSize(TypedValue.COMPLEX_UNIT_SP, 36);
                     sudokugrid[i][j].setText("" + unsolved[i][j]);
+                    sdg_block[i][j].setImageResource(R.drawable.block3);
                 }
 
             }
@@ -511,416 +515,493 @@ public class S5 extends AppCompatActivity implements View.OnClickListener{
                 }
                 break ;
             case R.id.button00:
+                if(unsolved[0][0] != 0) break ;
                 activei=0;
                 activej=0;
                 GridColorChange(activei,activej);
                 break;
             case R.id.button01:
+                if(unsolved[0][1] != 0) break ;
                 activei=0;
                 activej=1;
                 GridColorChange(activei,activej);
                 break;
             case R.id.button02:
+                if(unsolved[0][2] != 0) break ;
                 activei=0;
                 activej=2;
                 GridColorChange(activei,activej);
                 break;
             case R.id.button03:
+                if(unsolved[0][3] != 0) break ;
                 activei=0;
                 activej=3;
                 GridColorChange(activei,activej);
                 break;
             case R.id.button04:
+                if(unsolved[0][4] != 0) break ;
                 activei=0;
                 activej=4;
                 GridColorChange(activei,activej);
                 break;
             case R.id.button05:
+                if(unsolved[0][5] != 0) break ;
                 activei=0;
                 activej=5;
                 GridColorChange(activei,activej);
                 break;
             case R.id.button06:
+                if(unsolved[0][6] != 0) break ;
                 activei=0;
                 activej=6;
                 GridColorChange(activei,activej);
                 break;
             case R.id.button07:
+                if(unsolved[0][7] != 0) break ;
                 activei=0;
                 activej=7;
                 GridColorChange(activei,activej);
                 break;
             case R.id.button08:
+                if(unsolved[0][8] != 0) break ;
                 activei=0;
                 activej=8;
                 GridColorChange(activei,activej);
                 break;
             case R.id.button10:
+                if(unsolved[1][0] != 0) break ;
                 activei=1;
                 activej=0;
                 GridColorChange(activei,activej);
                 break;
             case R.id.button11:
+                if(unsolved[1][1] != 0) break ;
                 activei=1;
                 activej=1;
                 GridColorChange(activei,activej);
                 break;
             case R.id.button12:
+                if(unsolved[1][2] != 0) break ;
                 activei=1;
                 activej=2;
                 GridColorChange(activei,activej);
                 break;
             case R.id.button13:
+                if(unsolved[1][3] != 0) break ;
                 activei=1;
                 activej=3;
                 GridColorChange(activei,activej);
                 break;
             case R.id.button14:
+                if(unsolved[1][4] != 0) break ;
                 activei=1;
                 activej=4;
                 GridColorChange(activei,activej);
                 break;
             case R.id.button15:
+                if(unsolved[1][5] != 0) break ;
                 activei=1;
                 activej=5;
                 GridColorChange(activei,activej);
                 break;
             case R.id.button16:
+                if(unsolved[1][6] != 0) break ;
                 activei=1;
                 activej=6;
                 GridColorChange(activei,activej);
                 break;
             case R.id.button17:
+                if(unsolved[1][7] != 0) break ;
                 activei=1;
                 activej=7;
                 GridColorChange(activei,activej);
                 break;
             case R.id.button18:
+                if(unsolved[1][8] != 0) break ;
                 activei=1;
                 activej=8;
                 GridColorChange(activei,activej);
                 break;
             case R.id.button20:
+                if(unsolved[2][0] != 0) break ;
                 activei=2;
                 activej=0;
                 GridColorChange(activei,activej);
                 break;
             case R.id.button21:
+                if(unsolved[2][1] != 0) break ;
                 activei=2;
                 activej=1;
                 GridColorChange(activei,activej);
                 break;
             case R.id.button22:
+                if(unsolved[2][2] != 0) break ;
                 activei=2;
                 activej=2;
                 GridColorChange(activei,activej);
                 break;
             case R.id.button23:
+                if(unsolved[2][3] != 0) break ;
                 activei=2;
                 activej=3;
                 GridColorChange(activei,activej);
                 break;
             case R.id.button24:
+                if(unsolved[2][4] != 0) break ;
                 activei=2;
                 activej=4;
                 GridColorChange(activei,activej);
                 break;
             case R.id.button25:
+                if(unsolved[2][5] != 0) break ;
                 activei=2;
                 activej=5;
                 GridColorChange(activei,activej);
                 break;
             case R.id.button26:
+                if(unsolved[2][6] != 0) break ;
                 activei=2;
                 activej=6;
                 GridColorChange(activei,activej);
                 break;
             case R.id.button27:
+                if(unsolved[2][7] != 0) break ;
                 activei=2;
                 activej=7;
                 GridColorChange(activei,activej);
                 break;
             case R.id.button28:
+                if(unsolved[2][8] != 0) break ;
                 activei=2;
                 activej=8;
                 GridColorChange(activei,activej);
                 break;
             case R.id.button30:
+                if(unsolved[3][0] != 0) break ;
                 activei=3;
                 activej=0;
                 GridColorChange(activei,activej);
                 break;
             case R.id.button31:
+                if(unsolved[3][1] != 0) break ;
                 activei=3;
                 activej=1;
                 GridColorChange(activei,activej);
                 break;
             case R.id.button32:
+                if(unsolved[3][2] != 0) break ;
                 activei=3;
                 activej=2;
                 GridColorChange(activei,activej);
                 break;
             case R.id.button33:
+                if(unsolved[3][3] != 0) break ;
                 activei=3;
                 activej=3;
                 GridColorChange(activei,activej);
                 break;
             case R.id.button34:
+                if(unsolved[3][4] != 0) break ;
                 activei=3;
                 activej=4;
                 GridColorChange(activei,activej);
                 break;
             case R.id.button35:
+                if(unsolved[3][5] != 0) break ;
                 activei=3;
                 activej=5;
                 GridColorChange(activei,activej);
                 break;
             case R.id.button36:
+                if(unsolved[3][6] != 0) break ;
                 activei=3;
                 activej=6;
                 GridColorChange(activei,activej);
                 break;
             case R.id.button37:
+                if(unsolved[3][7] != 0) break ;
                 activei=3;
                 activej=7;
                 GridColorChange(activei,activej);
                 break;
             case R.id.button38:
+                if(unsolved[3][8] != 0) break ;
                 activei=3;
                 activej=8;
                 GridColorChange(activei,activej);
                 break;
             case R.id.button40:
+                if(unsolved[4][0] != 0) break ;
                 activei=4;
                 activej=0;
                 GridColorChange(activei,activej);
                 break;
             case R.id.button41:
+                if(unsolved[4][1] != 0) break ;
                 activei=4;
                 activej=1;
                 GridColorChange(activei,activej);
                 break;
             case R.id.button42:
+                if(unsolved[4][2] != 0) break ;
                 activei=4;
                 activej=2;
                 GridColorChange(activei,activej);
                 break;
             case R.id.button43:
+                if(unsolved[4][3] != 0) break ;
                 activei=4;
                 activej=3;
                 GridColorChange(activei,activej);
                 break;
             case R.id.button44:
+                if(unsolved[4][4] != 0) break ;
                 activei=4;
                 activej=4;
                 GridColorChange(activei,activej);
                 break;
             case R.id.button45:
+                if(unsolved[4][5] != 0) break ;
                 activei=4;
                 activej=5;
                 GridColorChange(activei,activej);
                 break;
             case R.id.button46:
+                if(unsolved[4][6] != 0) break ;
                 activei=4;
                 activej=6;
                 GridColorChange(activei,activej);
                 break;
             case R.id.button47:
+                if(unsolved[4][7] != 0) break ;
                 activei=4;
                 activej=7;
                 GridColorChange(activei,activej);
                 break;
             case R.id.button48:
+                if(unsolved[4][8] != 0) break ;
                 activei=4;
                 activej=8;
                 GridColorChange(activei,activej);
                 break;
             case R.id.button50:
+                if(unsolved[5][0] != 0) break ;
                 activei=5;
                 activej=0;
                 GridColorChange(activei,activej);
                 break;
             case R.id.button51:
+                if(unsolved[5][1] != 0) break ;
                 activei=5;
                 activej=1;
                 GridColorChange(activei,activej);
                 break;
             case R.id.button52:
+                if(unsolved[5][2] != 0) break ;
                 activei=5;
                 activej=2;
                 GridColorChange(activei,activej);
                 break;
             case R.id.button53:
+                if(unsolved[5][3] != 0) break ;
                 activei=5;
                 activej=3;
                 GridColorChange(activei,activej);
                 break;
             case R.id.button54:
+                if(unsolved[5][4] != 0) break ;
                 activei=5;
                 activej=4;
                 GridColorChange(activei,activej);
                 break;
             case R.id.button55:
+                if(unsolved[5][5] != 0) break ;
                 activei=5;
                 activej=5;
                 GridColorChange(activei,activej);
                 break;
             case R.id.button56:
+                if(unsolved[5][6] != 0) break ;
                 activei=5;
                 activej=6;
                 GridColorChange(activei,activej);
                 break;
             case R.id.button57:
+                if(unsolved[5][7] != 0) break ;
                 activei=5;
                 activej=7;
                 GridColorChange(activei,activej);
                 break;
             case R.id.button58:
+                if(unsolved[5][8] != 0) break ;
                 activei=5;
                 activej=8;
                 GridColorChange(activei,activej);
                 break;
             case R.id.button60:
+                if(unsolved[6][0] != 0) break ;
                 activei=6;
                 activej=0;
                 GridColorChange(activei,activej);
                 break;
             case R.id.button61:
+                if(unsolved[6][1] != 0) break ;
                 activei=6;
                 activej=1;
                 GridColorChange(activei,activej);
                 break;
             case R.id.button62:
+                if(unsolved[6][2] != 0) break ;
                 activei=6;
                 activej=2;
                 GridColorChange(activei,activej);
                 break;
             case R.id.button63:
+                if(unsolved[6][3] != 0) break ;
                 activei=6;
                 activej=3;
                 GridColorChange(activei,activej);
                 break;
             case R.id.button64:
+                if(unsolved[6][4] != 0) break ;
                 activei=6;
                 activej=4;
                 GridColorChange(activei,activej);
                 break;
             case R.id.button65:
+                if(unsolved[6][5] != 0) break ;
                 activei=6;
                 activej=5;
                 GridColorChange(activei,activej);
                 break;
             case R.id.button66:
+                if(unsolved[6][6] != 0) break ;
                 activei=6;
                 activej=6;
                 GridColorChange(activei,activej);
                 break;
             case R.id.button67:
+                if(unsolved[6][7] != 0) break ;
                 activei=6;
                 activej=7;
                 GridColorChange(activei,activej);
                 break;
             case R.id.button68:
+                if(unsolved[6][8] != 0) break ;
                 activei=6;
                 activej=8;
                 GridColorChange(activei,activej);
                 break;
             case R.id.button70:
+                if(unsolved[7][0] != 0) break ;
                 activei=7;
                 activej=0;
                 GridColorChange(activei,activej);
                 break;
             case R.id.button71:
+                if(unsolved[7][1] != 0) break ;
                 activei=7;
                 activej=1;
                 GridColorChange(activei,activej);
                 break;
             case R.id.button72:
+                if(unsolved[7][2] != 0) break ;
                 activei=7;
                 activej=2;
                 GridColorChange(activei,activej);
                 break;
             case R.id.button73:
+                if(unsolved[7][3] != 0) break ;
                 activei=7;
                 activej=3;
                 GridColorChange(activei,activej);
                 break;
             case R.id.button74:
+                if(unsolved[7][4] != 0) break ;
                 activei=7;
                 activej=4;
                 GridColorChange(activei,activej);
                 break;
             case R.id.button75:
+                if(unsolved[7][5] != 0) break ;
                 activei=7;
                 activej=5;
                 GridColorChange(activei,activej);
                 break;
             case R.id.button76:
+                if(unsolved[7][6] != 0) break ;
                 activei=7;
                 activej=6;
                 GridColorChange(activei,activej);
                 break;
             case R.id.button77:
+                if(unsolved[7][7] != 0) break ;
                 activei=7;
                 activej=7;
                 GridColorChange(activei,activej);
                 break;
             case R.id.button78:
+                if(unsolved[7][8] != 0) break ;
                 activei=7;
                 activej=8;
                 GridColorChange(activei,activej);
                 break;
             case R.id.button80:
+                if(unsolved[8][0] != 0) break ;
                 activei=8;
                 activej=0;
                 GridColorChange(activei,activej);
                 break;
             case R.id.button81:
+                if(unsolved[8][1] != 0) break ;
                 activei=8;
                 activej=1;
                 GridColorChange(activei,activej);
                 break;
             case R.id.button82:
+                if(unsolved[8][2] != 0) break ;
                 activei=8;
                 activej=2;
                 GridColorChange(activei,activej);
                 break;
             case R.id.button83:
+                if(unsolved[8][3] != 0) break ;
                 activei=8;
                 activej=3;
                 GridColorChange(activei,activej);
                 break;
             case R.id.button84:
+                if(unsolved[8][4] != 0) break ;
                 activei=8;
                 activej=4;
                 GridColorChange(activei,activej);
                 break;
             case R.id.button85:
+                if(unsolved[8][5] != 0) break ;
                 activei=8;
                 activej=5;
                 GridColorChange(activei,activej);
                 break;
             case R.id.button86:
+                if(unsolved[8][6] != 0) break ;
                 activei=8;
                 activej=6;
                 GridColorChange(activei,activej);
                 break;
             case R.id.button87:
+                if(unsolved[8][7] != 0) break ;
                 activei=8;
                 activej=7;
                 GridColorChange(activei,activej);
                 break;
             case R.id.button88:
+                if(unsolved[8][8] != 0) break ;
                 activei=8;
                 activej=8;
                 GridColorChange(activei,activej);
                 break;
             case R.id.digitButton1:
                 if(activej==-1) break ;
-                if(predefined_numbers[activei][activej]==true){
-                    Toast.makeText(getApplicationContext(),"Pre-defined cell cannot be changed",Toast.LENGTH_SHORT).show();
-                    break;
-                }
                 if(markingState == true){
                     if(markings[activei][activej][1]==true) markings[activei][activej][1] = false;
                     else markings[activei][activej][1] = true ;
@@ -937,10 +1018,7 @@ public class S5 extends AppCompatActivity implements View.OnClickListener{
                 break;
             case R.id.digitButton2:
                 if(activej==-1) break ;
-                if(predefined_numbers[activei][activej]==true){
-                    Toast.makeText(getApplicationContext(),"Pre-defined cell cannot be changed",Toast.LENGTH_SHORT).show();
-                    break;
-                }
+
                 if(markingState == true){
                     if(markings[activei][activej][2]==true) markings[activei][activej][2] = false;
                     else markings[activei][activej][2] = true ;
@@ -957,10 +1035,7 @@ public class S5 extends AppCompatActivity implements View.OnClickListener{
                 break;
             case R.id.digitButton3:
                 if(activej==-1) break ;
-                if(predefined_numbers[activei][activej]==true){
-                    Toast.makeText(getApplicationContext(),"Pre-defined cell cannot be changed",Toast.LENGTH_SHORT).show();
-                    break;
-                }
+
                 if(markingState == true){
                     if(markings[activei][activej][3]==true) markings[activei][activej][3] = false;
                     else markings[activei][activej][3] = true ;
@@ -977,10 +1052,7 @@ public class S5 extends AppCompatActivity implements View.OnClickListener{
                 break;
             case R.id.digitButton4:
                 if(activej==-1) break ;
-                if(predefined_numbers[activei][activej]==true){
-                    Toast.makeText(getApplicationContext(),"Pre-defined cell cannot be changed",Toast.LENGTH_SHORT).show();
-                    break;
-                }
+
                 if(markingState == true){
                     if(markings[activei][activej][4]==true) markings[activei][activej][4] = false;
                     else markings[activei][activej][4] = true ;
@@ -997,10 +1069,7 @@ public class S5 extends AppCompatActivity implements View.OnClickListener{
                 break;
             case R.id.digitButton5:
                 if(activej==-1) break ;
-                if(predefined_numbers[activei][activej]==true){
-                    Toast.makeText(getApplicationContext(),"Pre-defined cell cannot be changed",Toast.LENGTH_SHORT).show();
-                    break;
-                }
+
                 if(markingState == true){
                     if(markings[activei][activej][5]==true) markings[activei][activej][5] = false;
                     else markings[activei][activej][5] = true ;
@@ -1017,10 +1086,7 @@ public class S5 extends AppCompatActivity implements View.OnClickListener{
                 break;
             case R.id.digitButton6:
                 if(activej==-1) break ;
-                if(predefined_numbers[activei][activej]==true){
-                    Toast.makeText(getApplicationContext(),"Pre-defined cell cannot be changed",Toast.LENGTH_SHORT).show();
-                    break;
-                }
+
                 if(markingState == true){
                     if(markings[activei][activej][6]==true) markings[activei][activej][6] = false;
                     else markings[activei][activej][6] = true ;
@@ -1037,10 +1103,7 @@ public class S5 extends AppCompatActivity implements View.OnClickListener{
                 break;
             case R.id.digitButton7:
                 if(activej==-1) break ;
-                if(predefined_numbers[activei][activej]==true){
-                    Toast.makeText(getApplicationContext(),"Pre-defined cell cannot be changed",Toast.LENGTH_SHORT).show();
-                    break;
-                }
+
                 if(markingState == true){
                     if(markings[activei][activej][7]==true) markings[activei][activej][7] = false;
                     else markings[activei][activej][7] = true ;
@@ -1057,10 +1120,7 @@ public class S5 extends AppCompatActivity implements View.OnClickListener{
                 break;
             case R.id.digitButton8:
                 if(activej==-1) break ;
-                if(predefined_numbers[activei][activej]==true){
-                    Toast.makeText(getApplicationContext(),"Pre-defined cell cannot be changed",Toast.LENGTH_SHORT).show();
-                    break;
-                }
+
                 if(markingState == true){
                     if(markings[activei][activej][8]==true) markings[activei][activej][8] = false;
                     else markings[activei][activej][8] = true ;
@@ -1077,10 +1137,7 @@ public class S5 extends AppCompatActivity implements View.OnClickListener{
                 break;
             case R.id.digitButton9:
                 if(activej==-1) break ;
-                if(predefined_numbers[activei][activej]==true){
-                    Toast.makeText(getApplicationContext(),"Pre-defined cell cannot be changed",Toast.LENGTH_SHORT).show();
-                    break;
-                }
+
                 if(markingState == true){
                     if(markings[activei][activej][9]==true) markings[activei][activej][9] = false;
                     else markings[activei][activej][9] = true ;

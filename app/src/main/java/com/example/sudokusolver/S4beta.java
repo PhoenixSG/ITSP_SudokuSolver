@@ -18,7 +18,7 @@ public class S4beta extends AppCompatActivity {
     Button displayData;
     RadioGroup radioGroup;
     RadioButton radioButton;
-    Double output=0.0;
+    Double output = 0.0;
 
     int[][] board = new int[][]{
             {1, 2, 3, 4, 5, 6, 7, 8, 9},
@@ -35,7 +35,7 @@ public class S4beta extends AppCompatActivity {
     };
 
     Random random = new Random();
-    String solvedsudoku="", unsolvedsudoku ="";
+    String solvedsudoku = "", unsolvedsudoku = "";
 
     @Override
     protected void onStart() {
@@ -57,6 +57,7 @@ public class S4beta extends AppCompatActivity {
         MainApplication app = (MainApplication) getApplication();
         app.ring.pause();
     }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,18 +69,16 @@ public class S4beta extends AppCompatActivity {
         radioGroup = (RadioGroup) findViewById(R.id.radioGroup);
 
 
-
         displayData.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                solvedsudoku="";
-                unsolvedsudoku ="";
+                solvedsudoku = "";
+                unsolvedsudoku = "";
 
                 try {
                     output = getlevel();
-                }
-                catch (Exception e) {
+                } catch (Exception e) {
                     Toast.makeText(S4beta.this, "PLEASE SELECT ONE", Toast.LENGTH_SHORT).show();
                 }
                 for (int i = 0; i < 9; i++) {
@@ -88,16 +87,15 @@ public class S4beta extends AppCompatActivity {
                     }
                 }
 
-                for(int i=0; i<81; i++){
-                    if(random.nextDouble()<output){
-                        unsolvedsudoku = unsolvedsudoku +solvedsudoku.charAt(i);
-                    }
-                    else{
-                        unsolvedsudoku = unsolvedsudoku +"0";
+                for (int i = 0; i < 81; i++) {
+                    if (random.nextDouble() < output) {
+                        unsolvedsudoku = unsolvedsudoku + solvedsudoku.charAt(i);
+                    } else {
+                        unsolvedsudoku = unsolvedsudoku + "0";
                     }
                 }
 
-                if(output!=0) {
+                if (output != 0) {
                     Intent opensudoku = new Intent(getApplicationContext(), com.example.sudokusolver.S5.class);
                     opensudoku.putExtra("solved", solvedsudoku);
                     opensudoku.putExtra("unsolved", unsolvedsudoku);
@@ -109,7 +107,6 @@ public class S4beta extends AppCompatActivity {
 
                 //CURRENTLY, IF NONE OF EASY MEDIUM HARD IS SELECTED, BUT GO BUTTON IS PRESSED, THEN UNSOLVED IS JUST A STRING OF 81 ZEROES.
                 //USER WOULD HAVE TO COME BACK AND RESELECT ONE OF THE 3.
-
 
 
             }
@@ -205,6 +202,7 @@ public class S4beta extends AppCompatActivity {
             swap3X3Cols(i, ranNum);
         }
     }
+
     private void swap3X3Cols(int c1, int c2) {
         for (int i = 0; i < 3; i++) {
             swapCols(c1 * 3 + i, c2 * 3 + i);
@@ -212,10 +210,10 @@ public class S4beta extends AppCompatActivity {
     }
 
 
-    public Double getlevel(){
+    public Double getlevel() {
 
         int radioId = radioGroup.getCheckedRadioButtonId();
-        Double output=0.0;
+        Double output = 0.0;
         radioButton = findViewById(radioId);
 
         if (radioButton.getText().toString().equals("Easy")) {
