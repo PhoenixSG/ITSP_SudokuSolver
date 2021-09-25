@@ -4,9 +4,12 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.media.Image;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
+
 
 public class S3 extends AppCompatActivity {
 
@@ -39,9 +42,11 @@ public class S3 extends AppCompatActivity {
         this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
 
-        Button clickAPicButton = (Button) findViewById(R.id.clickAPicButton);
+        ImageButton clickAPicButton = (ImageButton) findViewById(R.id.clickAPicButton);
 
-        Button selectionButton = (Button) findViewById(R.id.selectionButton);
+        ImageButton selectionButton = (ImageButton) findViewById(R.id.selectionButton);
+
+        ImageButton menuBtn = (ImageButton) findViewById(R.id.menuBtn);
 
         clickAPicButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -56,6 +61,14 @@ public class S3 extends AppCompatActivity {
             public void onClick(View v) {
                 Intent openListScreen = new Intent(getApplicationContext(), com.example.sudokusolver.S4beta.class);
                 startActivity(openListScreen);
+            }
+        });
+
+        menuBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent openFirstScreen = new Intent(getApplicationContext(), com.example.sudokusolver.MainActivity.class);
+                startActivity(openFirstScreen);
             }
         });
 

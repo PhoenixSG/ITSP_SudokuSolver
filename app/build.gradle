@@ -3,7 +3,6 @@ plugins {
 }
 
 android {
-    useLibrary 'org.apache.http.legacy'
     compileSdkVersion 30
     buildToolsVersion "30.0.3"
 
@@ -50,9 +49,4 @@ dependencies {
     implementation "androidx.camera:camera-core:${cameraxVersion}"
     implementation "androidx.camera:camera-camera2:${cameraxVersion}"
     implementation 'androidx.annotation:annotation:1.1.0'
-    implementation 'commons-codec:commons-codec:1.13'
-    implementation 'org.apache.commons:commons-collections4:4.4'
-    implementation 'com.android.volley:volley:1.2.0'
-
-
 }

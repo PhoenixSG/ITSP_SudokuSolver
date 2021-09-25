@@ -5,6 +5,7 @@ import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
@@ -19,6 +20,7 @@ public class S4beta extends AppCompatActivity {
     RadioGroup radioGroup;
     RadioButton radioButton;
     Double output = 0.0;
+    ImageButton menuBtn ;
 
     int[][] board = new int[][]{
             {1, 2, 3, 4, 5, 6, 7, 8, 9},
@@ -64,10 +66,17 @@ public class S4beta extends AppCompatActivity {
         setContentView(R.layout.activity_s4beta);
         this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
-
+        menuBtn = (ImageButton) findViewById(R.id.menuBtn) ;
         displayData = (Button) findViewById(R.id.gotoMainScreenS4beta);
         radioGroup = (RadioGroup) findViewById(R.id.radioGroup);
 
+        menuBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent openFirstScreen = new Intent(getApplicationContext(), com.example.sudokusolver.MainActivity.class);
+                startActivity(openFirstScreen);
+            }
+        });
 
         displayData.setOnClickListener(new View.OnClickListener() {
             @Override

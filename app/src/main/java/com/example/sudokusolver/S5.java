@@ -1,11 +1,16 @@
 
 package com.example.sudokusolver;
 
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
-import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.content.res.ColorStateList;
+import android.graphics.Color;
+import android.os.Bundle;
 import android.util.TypedValue;
 import android.view.View;
 import android.widget.Button;
@@ -14,8 +19,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
+import java.util.Timer;
 
 
 public class S5 extends AppCompatActivity implements View.OnClickListener{
@@ -1002,6 +1006,10 @@ public class S5 extends AppCompatActivity implements View.OnClickListener{
                 break;
             case R.id.digitButton1:
                 if(activej==-1) break ;
+                if(predefined_numbers[activei][activej]==true){
+                    Toast.makeText(getApplicationContext(),"Pre-defined cell cannot be changed",Toast.LENGTH_SHORT).show();
+                    break;
+                }
                 if(markingState == true){
                     if(markings[activei][activej][1]==true) markings[activei][activej][1] = false;
                     else markings[activei][activej][1] = true ;
@@ -1018,7 +1026,10 @@ public class S5 extends AppCompatActivity implements View.OnClickListener{
                 break;
             case R.id.digitButton2:
                 if(activej==-1) break ;
-
+                if(predefined_numbers[activei][activej]==true){
+                    Toast.makeText(getApplicationContext(),"Pre-defined cell cannot be changed",Toast.LENGTH_SHORT).show();
+                    break;
+                }
                 if(markingState == true){
                     if(markings[activei][activej][2]==true) markings[activei][activej][2] = false;
                     else markings[activei][activej][2] = true ;
@@ -1035,7 +1046,10 @@ public class S5 extends AppCompatActivity implements View.OnClickListener{
                 break;
             case R.id.digitButton3:
                 if(activej==-1) break ;
-
+                if(predefined_numbers[activei][activej]==true){
+                    Toast.makeText(getApplicationContext(),"Pre-defined cell cannot be changed",Toast.LENGTH_SHORT).show();
+                    break;
+                }
                 if(markingState == true){
                     if(markings[activei][activej][3]==true) markings[activei][activej][3] = false;
                     else markings[activei][activej][3] = true ;
@@ -1052,7 +1066,10 @@ public class S5 extends AppCompatActivity implements View.OnClickListener{
                 break;
             case R.id.digitButton4:
                 if(activej==-1) break ;
-
+                if(predefined_numbers[activei][activej]==true){
+                    Toast.makeText(getApplicationContext(),"Pre-defined cell cannot be changed",Toast.LENGTH_SHORT).show();
+                    break;
+                }
                 if(markingState == true){
                     if(markings[activei][activej][4]==true) markings[activei][activej][4] = false;
                     else markings[activei][activej][4] = true ;
@@ -1069,7 +1086,10 @@ public class S5 extends AppCompatActivity implements View.OnClickListener{
                 break;
             case R.id.digitButton5:
                 if(activej==-1) break ;
-
+                if(predefined_numbers[activei][activej]==true){
+                    Toast.makeText(getApplicationContext(),"Pre-defined cell cannot be changed",Toast.LENGTH_SHORT).show();
+                    break;
+                }
                 if(markingState == true){
                     if(markings[activei][activej][5]==true) markings[activei][activej][5] = false;
                     else markings[activei][activej][5] = true ;
@@ -1086,7 +1106,10 @@ public class S5 extends AppCompatActivity implements View.OnClickListener{
                 break;
             case R.id.digitButton6:
                 if(activej==-1) break ;
-
+                if(predefined_numbers[activei][activej]==true){
+                    Toast.makeText(getApplicationContext(),"Pre-defined cell cannot be changed",Toast.LENGTH_SHORT).show();
+                    break;
+                }
                 if(markingState == true){
                     if(markings[activei][activej][6]==true) markings[activei][activej][6] = false;
                     else markings[activei][activej][6] = true ;
@@ -1103,7 +1126,10 @@ public class S5 extends AppCompatActivity implements View.OnClickListener{
                 break;
             case R.id.digitButton7:
                 if(activej==-1) break ;
-
+                if(predefined_numbers[activei][activej]==true){
+                    Toast.makeText(getApplicationContext(),"Pre-defined cell cannot be changed",Toast.LENGTH_SHORT).show();
+                    break;
+                }
                 if(markingState == true){
                     if(markings[activei][activej][7]==true) markings[activei][activej][7] = false;
                     else markings[activei][activej][7] = true ;
@@ -1120,7 +1146,10 @@ public class S5 extends AppCompatActivity implements View.OnClickListener{
                 break;
             case R.id.digitButton8:
                 if(activej==-1) break ;
-
+                if(predefined_numbers[activei][activej]==true){
+                    Toast.makeText(getApplicationContext(),"Pre-defined cell cannot be changed",Toast.LENGTH_SHORT).show();
+                    break;
+                }
                 if(markingState == true){
                     if(markings[activei][activej][8]==true) markings[activei][activej][8] = false;
                     else markings[activei][activej][8] = true ;
@@ -1137,7 +1166,10 @@ public class S5 extends AppCompatActivity implements View.OnClickListener{
                 break;
             case R.id.digitButton9:
                 if(activej==-1) break ;
-
+                if(predefined_numbers[activei][activej]==true){
+                    Toast.makeText(getApplicationContext(),"Pre-defined cell cannot be changed",Toast.LENGTH_SHORT).show();
+                    break;
+                }
                 if(markingState == true){
                     if(markings[activei][activej][9]==true) markings[activei][activej][9] = false;
                     else markings[activei][activej][9] = true ;

@@ -7,6 +7,16 @@
     android:background="@drawable/bg2"
     tools:context=".S4beta">
 
+    <ImageButton
+        android:id="@+id/menuBtn"
+        android:layout_width="59dp"
+        android:layout_height="58dp"
+        android:backgroundTint="#00FFFFFF"
+        android:scaleType="fitCenter"
+        android:src="@drawable/backmenu_btn"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <RadioGroup
         android:id="@+id/radioGroup"
         android:layout_width="wrap_content"

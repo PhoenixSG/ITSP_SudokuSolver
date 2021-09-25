@@ -31,10 +31,6 @@ import java.io.File;
 
 public class S4 extends AppCompatActivity {
 
-    String path_of_latest_image="";
-    //String solvedsudoku = "284375196739816254651942378476128539312594687598637412143769825965283741827451963";
-    //String unsolvedsudoku = "020070107009800004051902000070008039000094080500030402043000800960080000007000903";
-
     @Override
     protected void onStart() {
         super.onStart();
@@ -73,12 +69,8 @@ public class S4 extends AppCompatActivity {
         gotomain.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                if(!path_of_latest_image.equals("")) {
-                    Intent bufferactivity = new Intent(getApplicationContext(), com.example.sudokusolver.buffer.class);
-                    bufferactivity.putExtra("imagepath", path_of_latest_image);
-                    startActivity(bufferactivity);
-                }
+                Intent gotomain=new Intent(getApplicationContext(), com.example.sudokusolver.S5.class);
+                startActivity(gotomain);
             }
         });
 //        getSupportActionBar().hide();
@@ -122,16 +114,7 @@ public class S4 extends AppCompatActivity {
         findViewById(R.id.imageButton).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                path_of_latest_image = ""+getExternalFilesDir(Environment.DIRECTORY_PICTURES)+"/" +System.currentTimeMillis()+".png";
-
-                File file = new File(path_of_latest_image);
-
-
-
-
-
-
+                File file = new File(getExternalFilesDir(Environment.DIRECTORY_PICTURES)+"/" +System.currentTimeMillis()+".png");
 //                imgCap.takePicture(file, new ImageCapture.OnImageSavedListener() {
 //                    @Override
 //                    public void onImageSaved(@NonNull  File file) {
@@ -154,13 +137,13 @@ public class S4 extends AppCompatActivity {
                 imgCap.takePicture(file, new ImageCapture.OnImageSavedListener() {
                     @Override
                     public void onImageSaved(@NonNull @org.jetbrains.annotations.NotNull File file) {
-                        String msg = "Image Stored as" + file.getAbsolutePath();
+                        String msg = "Pic cap at" + file.getAbsolutePath();
                         Toast.makeText(getBaseContext(), msg, Toast.LENGTH_LONG).show();
                     }
 
                     @Override
                     public void onError(@NonNull @org.jetbrains.annotations.NotNull ImageCapture.UseCaseError useCaseError, @NonNull @org.jetbrains.annotations.NotNull String message, @Nullable @org.jetbrains.annotations.Nullable Throwable cause) {
-                        String msg = "Capture failed " + message;
+                        String msg = " Pic cap failed: " + message;
                         Toast.makeText(getBaseContext(), msg, Toast.LENGTH_LONG).show();
 
                         if (cause != null) {
