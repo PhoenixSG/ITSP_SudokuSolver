@@ -447,7 +447,7 @@ public class buffer2 extends AppCompatActivity implements View.OnClickListener{
                                 for(int i=0;i<81;i++) {
                                     zero81.append('0');
                                 }
-                                Toast.makeText(buffer2.this, "Incorrect Input", Toast.LENGTH_SHORT).show();
+                                //Toast.makeText(buffer2.this, "Incorrect Input", Toast.LENGTH_SHORT).show();
                                 if(!solved_sudoku.equals(zero81.toString())) {
                                     startActivity(gotoS5);
                                     finish();

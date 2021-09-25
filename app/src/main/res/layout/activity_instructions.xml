@@ -19,9 +19,10 @@
 
     <ImageView
         android:id="@+id/aboutus"
-        android:layout_width="398dp"
-        android:layout_height="600dp"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
         android:scaleType="fitCenter"
+        app:layout_constraintBottom_toTopOf="@+id/howtoplayBtn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/menuBtn2"
@@ -33,6 +34,7 @@
         android:layout_height="75dp"
         android:backgroundTint="#00FFFFFF"
         android:scaleType="centerCrop"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/aboutus"
