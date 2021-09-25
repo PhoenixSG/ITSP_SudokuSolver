@@ -31,10 +31,9 @@ import java.io.File;
 public class S4 extends AppCompatActivity {
 
     private int REQUEST_CODE_PERMISSIONS = 101;
-    private String[] REQUIRED_PERMISSIONS = new String[]{"android.permission.CAMERA", "android.permission.WRITE_EXTERNAL_STORAGE","android.permission.READ_EXTERNAL_STORAGE"};
+    private String[] REQUIRED_PERMISSIONS = new String[]{"android.permission.CAMERA", "android.permission.WRITE_EXTERNAL_STORAGE"};
 
     TextureView tv;
-    String pathOfImage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,9 +46,8 @@ public class S4 extends AppCompatActivity {
         gotomain.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent proceed=new Intent(getApplicationContext(), com.example.sudokusolver.S6.class);
-                proceed.putExtra("image path", pathOfImage);
-                startActivity(proceed);
+                Intent gotomain=new Intent(getApplicationContext(), com.example.sudokusolver.S5.class);
+                startActivity(gotomain);
             }
         });
 //        getSupportActionBar().hide();
@@ -117,7 +115,6 @@ public class S4 extends AppCompatActivity {
                     @Override
                     public void onImageSaved(@NonNull @org.jetbrains.annotations.NotNull File file) {
                         String msg = "Pic cap at" + file.getAbsolutePath();
-                        pathOfImage = ""+ file.getAbsolutePath();
                         Toast.makeText(getBaseContext(), msg, Toast.LENGTH_LONG).show();
                     }
 
