@@ -1483,15 +1483,15 @@
         android:layout_width="393dp"
         android:layout_height="393dp"
         android:layout_marginTop="160dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="20dp"
+        app:layout_constraintBottom_toTopOf="@+id/hintBtn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0"
         app:srcCompat="@drawable/sudoku_grid" />
 
     <ImageButton
-        android:id="@+id/imageButton1"
+        android:id="@+id/menuBtn"
         android:layout_width="59dp"
         android:layout_height="58dp"
         android:backgroundTint="#00FFFFFF"
@@ -1501,64 +1501,60 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageButton
-        android:id="@+id/imageButton2"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:layout_marginEnd="4dp"
+        android:id="@+id/solveBtn"
+        android:layout_width="65dp"
+        android:layout_height="79dp"
         android:layout_marginBottom="139dp"
         android:backgroundTint="#00FFFFFF"
-        android:scaleType="centerInside"
+        android:scaleType="centerCrop"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/imageButton3"
-        app:srcCompat="@drawable/solve_btn" />
+        app:layout_constraintEnd_toStartOf="@+id/hintBtn"
+        app:srcCompat="@drawable/solve" />
 
     <ImageButton
-        android:id="@+id/imageButton3"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:layout_marginEnd="4dp"
+        android:id="@+id/hintBtn"
+        android:layout_width="65dp"
+        android:layout_height="79dp"
         android:layout_marginBottom="140dp"
         android:backgroundTint="#00FFFFFF"
-        android:scaleType="centerInside"
+        android:scaleType="centerCrop"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/imageButton4"
-        app:srcCompat="@drawable/hint_btn" />
+        app:layout_constraintEnd_toStartOf="@+id/undoBtn"
+        app:srcCompat="@drawable/hint" />
 
     <ImageButton
-        android:id="@+id/imageButton6"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:layout_marginStart="4dp"
+        android:id="@+id/notesBtn"
+        android:layout_width="65dp"
+        android:layout_height="79dp"
         android:layout_marginBottom="140dp"
         android:backgroundTint="#00FFFFFF"
-        android:scaleType="centerInside"
+        android:scaleType="centerCrop"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/imageButton5"
-        app:srcCompat="@drawable/notes_btn" />
+        app:layout_constraintStart_toEndOf="@+id/eraseBtn"
+        app:srcCompat="@drawable/notes" />
 
     <ImageButton
-        android:id="@+id/imageButton5"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:layout_marginStart="4dp"
+        android:id="@+id/eraseBtn"
+        android:layout_width="65dp"
+        android:layout_height="79dp"
         android:layout_marginBottom="140dp"
         android:backgroundTint="#00FFFFFF"
-        android:scaleType="centerInside"
+        android:scaleType="centerCrop"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/imageButton4"
-        app:srcCompat="@drawable/erase_btn" />
+        app:layout_constraintStart_toEndOf="@+id/undoBtn"
+        app:srcCompat="@drawable/erase" />
 
     <ImageButton
-        android:id="@+id/imageButton4"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
+        android:id="@+id/undoBtn"
+        android:layout_width="65dp"
+        android:layout_height="79dp"
         android:layout_marginBottom="140dp"
         android:backgroundTint="#00FFFFFF"
-        android:scaleType="centerInside"
+        android:scaleType="centerCrop"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/undo_btn" />
+        app:srcCompat="@drawable/undo" />
 
     <ImageButton
         android:id="@+id/digitButton1"
@@ -1669,14 +1665,14 @@
         app:layout_constraintEnd_toStartOf="@+id/digitButton3"
         app:srcCompat="@drawable/btn2" />
 
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="121dp"
-        android:layout_height="36dp"
+    <Button
+        android:id="@+id/timerbutton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
-        android:layout_marginEnd="8dp"
-        android:background="@drawable/timer"
-        android:text="TextView"
+        android:layout_marginEnd="12dp"
+        android:text="Button"
+        android:textColor="#000000"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

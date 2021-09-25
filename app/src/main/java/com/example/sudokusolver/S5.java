@@ -5,14 +5,15 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.util.TypedValue;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.TextView;
 
 
 public class S5 extends AppCompatActivity implements View.OnClickListener{
+
 
     static boolean[][][] markings = new boolean[9][9][10] ;
 
@@ -38,13 +39,47 @@ public class S5 extends AppCompatActivity implements View.OnClickListener{
     int activej = -1;
     Button[][] sudokugrid= new Button[9][9];
     ImageButton[] digitButton = new ImageButton[10];
-    ImageButton[] imageButton = new ImageButton[10];
-    static boolean markingState = true ;
+    static boolean markingState = false ;
+    ImageButton menuBtn ;
+    ImageButton solveBtn ;
+    ImageButton hintBtn ;
+    ImageButton undoBtn ;
+    ImageButton eraseBtn ;
+    ImageButton notesBtn ;
+    int number = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+//        final Handler handler = new Handler();
+//        Runnable run = new Runnable(){
+//            @Override
+//            public void run() {
+//                number+=10;
+//                Toast.makeText(S5.this, ""+number+" seconds have passed", Toast.LENGTH_SHORT).show();
+//                handler.postDelayed(this, 10000);
+//            }
+//        };
+//        handler.post(run);
+
+//        new CountDownTimer(60000, 100){
+//            @Override
+//            public void onTick(long millisUntilFinished) {
+//                number++;
+//                timer.setText(""+number);
+//            }
+//
+//            @Override
+//            public void onFinish() {
+//                timer.setText("Finish");
+//            }
+//        }.start();
+
         setContentView(R.layout.activity_s5);
+
 
         digitButton[1] = (ImageButton) findViewById(R.id.digitButton1) ;
         digitButton[2] = (ImageButton) findViewById(R.id.digitButton2) ;
@@ -56,13 +91,14 @@ public class S5 extends AppCompatActivity implements View.OnClickListener{
         digitButton[8] = (ImageButton) findViewById(R.id.digitButton8) ;
         digitButton[9] = (ImageButton) findViewById(R.id.digitButton9) ;
 
-        imageButton[1] = (ImageButton) findViewById(R.id.imageButton1);
-        imageButton[2] = (ImageButton) findViewById(R.id.imageButton2);
-        imageButton[3] = (ImageButton) findViewById(R.id.imageButton3);
-        imageButton[4] = (ImageButton) findViewById(R.id.imageButton4);
-        imageButton[5] = (ImageButton) findViewById(R.id.imageButton5);
-        imageButton[6] = (ImageButton) findViewById(R.id.imageButton6);
+        menuBtn = (ImageButton) findViewById(R.id.menuBtn);
+        solveBtn = (ImageButton) findViewById(R.id.solveBtn);
+        hintBtn = (ImageButton) findViewById(R.id.hintBtn);
+        undoBtn = (ImageButton) findViewById(R.id.undoBtn);
+        eraseBtn = (ImageButton) findViewById(R.id.eraseBtn);
+        notesBtn = (ImageButton) findViewById(R.id.notesBtn);
 
+        Button timer = (Button) findViewById(R.id.timerbutton);
 
 
         sudokugrid[0][0]=(Button) findViewById(R.id.button00);
@@ -242,30 +278,44 @@ public class S5 extends AppCompatActivity implements View.OnClickListener{
         digitButton[8].setOnClickListener(this);
         digitButton[9].setOnClickListener(this);
 
-        imageButton[1].setOnClickListener(this);
-        imageButton[2].setOnClickListener(this);
-        imageButton[3].setOnClickListener(this);
-        imageButton[4].setOnClickListener(this);
-        imageButton[5].setOnClickListener(this);
-        imageButton[6].setOnClickListener(this);
-
+        menuBtn.setOnClickListener(this);
+        solveBtn.setOnClickListener(this);
+        hintBtn.setOnClickListener(this);
+        undoBtn.setOnClickListener(this);
+        eraseBtn.setOnClickListener(this);
+        notesBtn.setOnClickListener(this);
+        timer.setOnClickListener(this);
 
     }
 
     @Override
     public void onClick(View v) {
-        TextView sample = (TextView) findViewById(R.id.textView2);
 
 
         switch(v.getId()){
 
-            case R.id.imageButton1:
-                Intent openFirstScreen = new Intent(getApplicationContext(), S3.class);
+            case R.id.menuBtn:
+                Intent openFirstScreen = new Intent(getApplicationContext(), com.example.sudokusolver.MainActivity.class);
                 startActivity(openFirstScreen);
                 break;
-            case R.id.imageButton6:
+            case R.id.notesBtn:
                 markingState= !markingState;
+                if(markingState == true) {
+                    notesBtn.setImageResource(R.drawable.notes_active);
+                }
+                else {
+                    notesBtn.setImageResource(R.drawable.notes);
+                }
                 break;
+            case R.id.eraseBtn:
+                if(activei!=-1 && activej!=-1) {
+                    for(int i=1;i<=9;i++) {
+                        markings[activei][activej][i] = false ;
+                    }
+                    sudokugrid[activei][activej].setTextSize(TypedValue.COMPLEX_UNIT_SP, 24);
+                    sudokugrid[activei][activej].setText(" ");
+                }
+                break ;
             case R.id.button00:
                 activei=0;
                 activej=0;
@@ -277,372 +327,298 @@ public class S5 extends AppCompatActivity implements View.OnClickListener{
             case R.id.button02:
                 activei=0;
                 activej=2;
-                sample.setText("02");
                 break;
             case R.id.button03:
                 activei=0;
                 activej=3;
-                sample.setText("03");
                 break;
             case R.id.button04:
                 activei=0;
                 activej=4;
-                sample.setText("04");
                 break;
             case R.id.button05:
                 activei=0;
                 activej=5;
-                sample.setText("05");
                 break;
             case R.id.button06:
                 activei=0;
                 activej=6;
-                sample.setText("06");
                 break;
             case R.id.button07:
                 activei=0;
                 activej=7;
-                sample.setText("07");
                 break;
             case R.id.button08:
                 activei=0;
                 activej=8;
-                sample.setText("08");
                 break;
             case R.id.button10:
                 activei=1;
                 activej=0;
-                sample.setText("10");
                 break;
             case R.id.button11:
                 activei=1;
                 activej=1;
-                sample.setText("11");
                 break;
             case R.id.button12:
                 activei=1;
                 activej=2;
-                sample.setText("12");
                 break;
             case R.id.button13:
                 activei=1;
                 activej=3;
-                sample.setText("13");
                 break;
             case R.id.button14:
                 activei=1;
                 activej=4;
-                sample.setText("14");
                 break;
             case R.id.button15:
                 activei=1;
                 activej=5;
-                sample.setText("15");
                 break;
             case R.id.button16:
                 activei=1;
                 activej=6;
-                sample.setText("16");
                 break;
             case R.id.button17:
                 activei=1;
                 activej=7;
-                sample.setText("17");
                 break;
             case R.id.button18:
                 activei=1;
                 activej=8;
-                sample.setText("18");
                 break;
             case R.id.button20:
                 activei=2;
                 activej=0;
-                sample.setText("20");
                 break;
             case R.id.button21:
                 activei=2;
                 activej=1;
-                sample.setText("21");
                 break;
             case R.id.button22:
                 activei=2;
                 activej=2;
-                sample.setText("22");
                 break;
             case R.id.button23:
                 activei=2;
                 activej=3;
-                sample.setText("23");
                 break;
             case R.id.button24:
                 activei=2;
                 activej=4;
-                sample.setText("24");
                 break;
             case R.id.button25:
                 activei=2;
                 activej=5;
-                sample.setText("25");
                 break;
             case R.id.button26:
                 activei=2;
                 activej=6;
-                sample.setText("26");
                 break;
             case R.id.button27:
                 activei=2;
                 activej=7;
-                sample.setText("27");
                 break;
             case R.id.button28:
                 activei=2;
                 activej=8;
-                sample.setText("28");
                 break;
             case R.id.button30:
                 activei=3;
                 activej=0;
-                sample.setText("30");
                 break;
             case R.id.button31:
                 activei=3;
                 activej=1;
-                sample.setText("31");
                 break;
             case R.id.button32:
                 activei=3;
                 activej=2;
-                sample.setText("32");
                 break;
             case R.id.button33:
                 activei=3;
                 activej=3;
-                sample.setText("33");
                 break;
             case R.id.button34:
                 activei=3;
                 activej=4;
-                sample.setText("34");
                 break;
             case R.id.button35:
                 activei=3;
                 activej=5;
-                sample.setText("35");
                 break;
             case R.id.button36:
                 activei=3;
                 activej=6;
-                sample.setText("36");
                 break;
             case R.id.button37:
                 activei=3;
                 activej=7;
-                sample.setText("37");
                 break;
             case R.id.button38:
                 activei=3;
                 activej=8;
-                sample.setText("38");
                 break;
             case R.id.button40:
                 activei=4;
                 activej=0;
-                sample.setText("40");
                 break;
             case R.id.button41:
                 activei=4;
                 activej=1;
-                sample.setText("41");
                 break;
             case R.id.button42:
                 activei=4;
                 activej=2;
-                sample.setText("42");
                 break;
             case R.id.button43:
                 activei=4;
                 activej=3;
-                sample.setText("43");
                 break;
             case R.id.button44:
                 activei=4;
                 activej=4;
-                sample.setText("44");
                 break;
             case R.id.button45:
                 activei=4;
                 activej=5;
-                sample.setText("45");
                 break;
             case R.id.button46:
                 activei=4;
                 activej=6;
-                sample.setText("46");
                 break;
             case R.id.button47:
                 activei=4;
                 activej=7;
-                sample.setText("47");
                 break;
             case R.id.button48:
                 activei=4;
                 activej=8;
-                sample.setText("48");
                 break;
             case R.id.button50:
                 activei=5;
                 activej=0;
-                sample.setText("50");
                 break;
             case R.id.button51:
                 activei=5;
                 activej=1;
-                sample.setText("51");
                 break;
             case R.id.button52:
                 activei=5;
                 activej=2;
-                sample.setText("52");
                 break;
             case R.id.button53:
                 activei=5;
                 activej=3;
-                sample.setText("53");
                 break;
             case R.id.button54:
                 activei=5;
                 activej=4;
-                sample.setText("54");
                 break;
             case R.id.button55:
                 activei=5;
                 activej=5;
-                sample.setText("55");
                 break;
             case R.id.button56:
                 activei=5;
                 activej=6;
-                sample.setText("56");
                 break;
             case R.id.button57:
                 activei=5;
                 activej=7;
-                sample.setText("57");
                 break;
             case R.id.button58:
                 activei=5;
                 activej=8;
-                sample.setText("58");
                 break;
             case R.id.button60:
                 activei=6;
                 activej=0;
-                sample.setText("60");
                 break;
             case R.id.button61:
                 activei=6;
                 activej=1;
-                sample.setText("61");
                 break;
             case R.id.button62:
                 activei=6;
                 activej=2;
-                sample.setText("62");
                 break;
             case R.id.button63:
                 activei=6;
                 activej=3;
-                sample.setText("63");
                 break;
             case R.id.button64:
                 activei=6;
                 activej=4;
-                sample.setText("64");
                 break;
             case R.id.button65:
                 activei=6;
                 activej=5;
-                sample.setText("65");
                 break;
             case R.id.button66:
                 activei=6;
                 activej=6;
-                sample.setText("66");
                 break;
             case R.id.button67:
                 activei=6;
                 activej=7;
-                sample.setText("67");
                 break;
             case R.id.button68:
                 activei=6;
                 activej=8;
-                sample.setText("68");
                 break;
             case R.id.button70:
                 activei=7;
                 activej=0;
-                sample.setText("70");
                 break;
             case R.id.button71:
                 activei=7;
                 activej=1;
-                sample.setText("71");
                 break;
             case R.id.button72:
                 activei=7;
                 activej=2;
-                sample.setText("72");
                 break;
             case R.id.button73:
                 activei=7;
                 activej=3;
-                sample.setText("73");
                 break;
             case R.id.button74:
                 activei=7;
                 activej=4;
-                sample.setText("74");
                 break;
             case R.id.button75:
                 activei=7;
                 activej=5;
-                sample.setText("75");
                 break;
             case R.id.button76:
                 activei=7;
                 activej=6;
-                sample.setText("76");
                 break;
             case R.id.button77:
                 activei=7;
                 activej=7;
-                sample.setText("77");
                 break;
             case R.id.button78:
                 activei=7;
                 activej=8;
-                sample.setText("78");
                 break;
             case R.id.button80:
                 activei=8;
                 activej=0;
-                sample.setText("80");
                 break;
             case R.id.button81:
                 activei=8;
                 activej=1;
-                sample.setText("81");
                 break;
             case R.id.button82:
                 activei=8;
                 activej=2;
-                sample.setText("82");
                 break;
             case R.id.button83:
                 activei=8;
                 activej=3;
-                sample.setText("83");
                 break;
             case R.id.button84:
                 activei=8;
@@ -673,6 +649,9 @@ public class S5 extends AppCompatActivity implements View.OnClickListener{
                     sudokugrid[activei][activej].setText(GenerateMarkings(activei, activej)) ;
                 }
                 else{
+                    for(int i=1;i<=9;i++) {
+                        markings[activei][activej][i] = false ;
+                    }
                     sudokugrid[activei][activej].setTextSize(TypedValue.COMPLEX_UNIT_SP, 24);
                     sudokugrid[activei][activej].setText("1");
                 }
@@ -686,6 +665,9 @@ public class S5 extends AppCompatActivity implements View.OnClickListener{
                     sudokugrid[activei][activej].setText(GenerateMarkings(activei, activej)) ;
                 }
                 else{
+                    for(int i=1;i<=9;i++) {
+                        markings[activei][activej][i] = false ;
+                    }
                     sudokugrid[activei][activej].setTextSize(TypedValue.COMPLEX_UNIT_SP, 24);
                     sudokugrid[activei][activej].setText("2");
                 }
@@ -699,6 +681,9 @@ public class S5 extends AppCompatActivity implements View.OnClickListener{
                     sudokugrid[activei][activej].setText(GenerateMarkings(activei, activej)) ;
                 }
                 else{
+                    for(int i=1;i<=9;i++) {
+                        markings[activei][activej][i] = false ;
+                    }
                     sudokugrid[activei][activej].setTextSize(TypedValue.COMPLEX_UNIT_SP, 24);
                     sudokugrid[activei][activej].setText("3");
                 }
@@ -712,6 +697,9 @@ public class S5 extends AppCompatActivity implements View.OnClickListener{
                     sudokugrid[activei][activej].setText(GenerateMarkings(activei, activej)) ;
                 }
                 else{
+                    for(int i=1;i<=9;i++) {
+                        markings[activei][activej][i] = false ;
+                    }
                     sudokugrid[activei][activej].setTextSize(TypedValue.COMPLEX_UNIT_SP, 24);
                     sudokugrid[activei][activej].setText("4");
                 }
@@ -725,6 +713,9 @@ public class S5 extends AppCompatActivity implements View.OnClickListener{
                     sudokugrid[activei][activej].setText(GenerateMarkings(activei, activej)) ;
                 }
                 else{
+                    for(int i=1;i<=9;i++) {
+                        markings[activei][activej][i] = false ;
+                    }
                     sudokugrid[activei][activej].setTextSize(TypedValue.COMPLEX_UNIT_SP, 24);
                     sudokugrid[activei][activej].setText("5");
                 }
@@ -738,6 +729,9 @@ public class S5 extends AppCompatActivity implements View.OnClickListener{
                     sudokugrid[activei][activej].setText(GenerateMarkings(activei, activej)) ;
                 }
                 else{
+                    for(int i=1;i<=9;i++) {
+                        markings[activei][activej][i] = false ;
+                    }
                     sudokugrid[activei][activej].setTextSize(TypedValue.COMPLEX_UNIT_SP, 24);
                     sudokugrid[activei][activej].setText("6");
                 }
@@ -751,6 +745,9 @@ public class S5 extends AppCompatActivity implements View.OnClickListener{
                     sudokugrid[activei][activej].setText(GenerateMarkings(activei, activej)) ;
                 }
                 else{
+                    for(int i=1;i<=9;i++) {
+                        markings[activei][activej][i] = false ;
+                    }
                     sudokugrid[activei][activej].setTextSize(TypedValue.COMPLEX_UNIT_SP, 24);
                     sudokugrid[activei][activej].setText("7");
                 }
@@ -764,6 +761,9 @@ public class S5 extends AppCompatActivity implements View.OnClickListener{
                     sudokugrid[activei][activej].setText(GenerateMarkings(activei, activej)) ;
                 }
                 else{
+                    for(int i=1;i<=9;i++) {
+                        markings[activei][activej][i] = false ;
+                    }
                     sudokugrid[activei][activej].setTextSize(TypedValue.COMPLEX_UNIT_SP, 24);
                     sudokugrid[activei][activej].setText("8");
                 }
@@ -777,10 +777,14 @@ public class S5 extends AppCompatActivity implements View.OnClickListener{
                     sudokugrid[activei][activej].setText(GenerateMarkings(activei, activej)) ;
                 }
                 else{
+                    for(int i=1;i<=9;i++) {
+                        markings[activei][activej][i] = false ;
+                    }
                     sudokugrid[activei][activej].setTextSize(TypedValue.COMPLEX_UNIT_SP, 24);
                     sudokugrid[activei][activej].setText("9");
                 }
                 break;
+
         }
     }
 }
