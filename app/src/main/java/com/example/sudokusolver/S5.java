@@ -9,8 +9,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.os.CountDownTimer;
-import android.content.res.ColorStateList;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.util.TypedValue;
 import android.view.View;
@@ -19,8 +17,6 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import java.util.Timer;
 
 
 public class S5 extends AppCompatActivity implements View.OnClickListener{
@@ -34,15 +30,21 @@ public class S5 extends AppCompatActivity implements View.OnClickListener{
     protected void onStart() {
         super.onStart();
         MainApplication app = (MainApplication) getApplication();
-        app.ring.start();
+        if(app.ring_start) {
+            app.ring.start();
+        }
+
     }
 
     @Override
     protected void onResume() {
         super.onResume();
         MainApplication app = (MainApplication) getApplication();
-        app.ring.start();
+        if(app.ring_start) {
+            app.ring.start();
+        }
     }
+
 
     @Override
     protected void onPause() {
@@ -75,7 +77,7 @@ public class S5 extends AppCompatActivity implements View.OnClickListener{
     ImageButton menuBtn ;
     ImageButton solveBtn ;
     ImageButton hintBtn ;
-    ImageButton undoBtn ;
+    ImageButton resetBtn ;
     ImageButton eraseBtn ;
     ImageButton notesBtn ;
     static String example_solved;
@@ -83,11 +85,19 @@ public class S5 extends AppCompatActivity implements View.OnClickListener{
     static String current;
     static String[] cell_digit;
     static String string_timer;
+    static boolean solved_state = false;
+    CountDownTimer sudokutimer;
 
 
     TextView Timer;
     public int counter;
     boolean started = false ;
+
+    void after_solve(){
+        if(solved_state = true){
+            Toast.makeText(getApplicationContext(),"Sudoku already solved",Toast.LENGTH_SHORT).show();
+        }
+    }
 
     static String FormatTime(int seconds) {
         int minutes = seconds/60 ;
@@ -146,6 +156,7 @@ public class S5 extends AppCompatActivity implements View.OnClickListener{
             if(solving[i/9][i%9]==solved[i/9][i%9]){
                 if(i==80){
                     resume=false;
+                    sudokutimer.cancel();
                     Toast.makeText(getApplicationContext(),"You have solved",Toast.LENGTH_SHORT).show();
                     Intent Back2menu = new Intent(getApplicationContext(),com.example.sudokusolver.FinishSplash.class) ;
                     startActivity(Back2menu);
@@ -202,7 +213,7 @@ public class S5 extends AppCompatActivity implements View.OnClickListener{
         menuBtn = (ImageButton) findViewById(R.id.menuBtn);
         solveBtn = (ImageButton) findViewById(R.id.solveBtn);
         hintBtn = (ImageButton) findViewById(R.id.hintBtn);
-        undoBtn = (ImageButton) findViewById(R.id.undoBtn);
+        resetBtn = (ImageButton) findViewById(R.id.resetBtn);
         eraseBtn = (ImageButton) findViewById(R.id.eraseBtn);
         notesBtn = (ImageButton) findViewById(R.id.notesBtn);
 
@@ -469,7 +480,7 @@ public class S5 extends AppCompatActivity implements View.OnClickListener{
         menuBtn.setOnClickListener(this);
         solveBtn.setOnClickListener(this);
         hintBtn.setOnClickListener(this);
-        undoBtn.setOnClickListener(this);
+        resetBtn.setOnClickListener(this);
         eraseBtn.setOnClickListener(this);
         notesBtn.setOnClickListener(this);
 
@@ -480,15 +491,16 @@ public class S5 extends AppCompatActivity implements View.OnClickListener{
         Timer = (TextView) findViewById(R.id.textView2) ;
         if(!started) {
             started=true ;
-            new CountDownTimer(300000000, 1000){
+            sudokutimer = new CountDownTimer(300000000, 1000){
                 public void onTick(long millisUntilFinished){
                     Timer.setText(FormatTime(counter));
                     counter++;
                 }
-                public  void onFinish(){
+                public void onFinish(){
                     Timer.setText("FINISH!!");
                 }
-            }.start();
+            };
+            sudokutimer.start();
         }
 
         for(int i=0 ; i<9 ; i++){
@@ -503,31 +515,31 @@ public class S5 extends AppCompatActivity implements View.OnClickListener{
                     if(getIntent().getBooleanExtra("fromS4beta",true)) {
                         sudokugrid[i][j].setTextSize(TypedValue.COMPLEX_UNIT_SP, 36);
                         sudokugrid[i][j].setText(" ");
-                        sdg_block[i][j].setImageResource(R.drawable.block2);
+                        if((i/3+j/3)%2==1) sdg_block[i][j].setImageResource(R.drawable.block2);
+                        else sdg_block[i][j].setImageResource(R.drawable.block1);
+
                     }
                     else{
                         if(cell_digit[i*9+j].length() != 1){
                             sudokugrid[i][j].setTextSize(TypedValue.COMPLEX_UNIT_SP, 12);
                             sudokugrid[i][j].setText(cell_digit[i*9+j]+"");
-                            sdg_block[i][j].setImageResource(R.drawable.block2);
+                            if((i/3+j/3)%2==1) sdg_block[i][j].setImageResource(R.drawable.block2);
+                            else sdg_block[i][j].setImageResource(R.drawable.block1);
                         }
                         else if (!cell_digit[i*9 +j].contains("0")){
                             sudokugrid[i][j].setTextSize(TypedValue.COMPLEX_UNIT_SP, 36);
                             sudokugrid[i][j].setText(cell_digit[i*9+j]+"");
-                            sdg_block[i][j].setImageResource(R.drawable.block2);
+                            if((i/3+j/3)%2==1) sdg_block[i][j].setImageResource(R.drawable.block2);
+                            else sdg_block[i][j].setImageResource(R.drawable.block1);
                         }
                         else {
                             sudokugrid[i][j].setTextSize(TypedValue.COMPLEX_UNIT_SP, 36);
                             sudokugrid[i][j].setText(" ");
-                            sdg_block[i][j].setImageResource(R.drawable.block2);
+                            if((i/3+j/3)%2==1) sdg_block[i][j].setImageResource(R.drawable.block2);
+                            else sdg_block[i][j].setImageResource(R.drawable.block1);
                         }
-
                     }
-
                 }
-
-
-
             }
         }
 
@@ -545,6 +557,11 @@ public class S5 extends AppCompatActivity implements View.OnClickListener{
         switch(v.getId()){
 
             case R.id.solveBtn:
+                if(solved_state){
+                    Toast.makeText(getApplicationContext(),"Sudoku already solved",Toast.LENGTH_SHORT).show();
+                    break;
+                }
+
                 AlertDialog.Builder confirmation_box_builder = new AlertDialog.Builder(S5.this);
                 confirmation_box_builder.setCancelable(true);
                 confirmation_box_builder.setTitle("Solve Sudoku");
@@ -564,21 +581,34 @@ public class S5 extends AppCompatActivity implements View.OnClickListener{
                                 sudokugrid[i][j].setText(""+solved[i][j]);
                             }
                         }
+                        solved_state = true;
                     }
                 });
                 AlertDialog confirmation_box = confirmation_box_builder.create();
                 confirmation_box.show();
+                sudokutimer.cancel();
                 break;
             case R.id.hintBtn:
+                if(solved_state){
+                    Toast.makeText(getApplicationContext(),"Sudoku already solved",Toast.LENGTH_SHORT).show();
+                    break;
+                }
                 if(activej == -1) break;
                 sudokugrid[activei][activej].setTextSize(TypedValue.COMPLEX_UNIT_SP, 36);
                 sudokugrid[activei][activej].setText(""+solved[activei][activej]);
+                solving[activei][activej]=solved[activei][activej];
+                check_solved();
                 break;
             case R.id.menuBtn:
                 Intent openFirstScreen = new Intent(getApplicationContext(), com.example.sudokusolver.MainActivity.class);
                 startActivity(openFirstScreen);
+                finish();
                 break;
             case R.id.notesBtn:
+                if(solved_state){
+                    Toast.makeText(getApplicationContext(),"Sudoku already solved",Toast.LENGTH_SHORT).show();
+                    break;
+                }
                 markingState= !markingState;
                 if(markingState == true) {
                     notesBtn.setImageResource(R.drawable.notes_btn2);
@@ -588,11 +618,11 @@ public class S5 extends AppCompatActivity implements View.OnClickListener{
                 }
                 break;
             case R.id.eraseBtn:
+                if(solved_state){
+                    Toast.makeText(getApplicationContext(),"Sudoku already solved",Toast.LENGTH_SHORT).show();
+                    break;
+                }
                 if(activei!=-1 && activej!=-1) {
-                    if(predefined_numbers[activei][activej]==true){
-                        Toast.makeText(getApplicationContext(),"Pre-defined cell cannot be changed",Toast.LENGTH_SHORT).show();
-                        break;
-                    }
                     for(int i=1;i<=9;i++) {
                         markings[activei][activej][i] = false ;
                     }
@@ -600,6 +630,35 @@ public class S5 extends AppCompatActivity implements View.OnClickListener{
                     sudokugrid[activei][activej].setText(" ");
                 }
                 break ;
+            case  R.id.resetBtn:
+                if(solved_state){
+                    Toast.makeText(getApplicationContext(),"Sudoku already solved",Toast.LENGTH_SHORT).show();
+                    break;
+                }
+                AlertDialog.Builder reset_box_builder = new AlertDialog.Builder(S5.this);
+                reset_box_builder.setCancelable(true);
+                reset_box_builder.setTitle("Reset Sudoku");
+                reset_box_builder.setMessage("Are you sure you want reset the Sudoku?");
+                reset_box_builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                });
+                reset_box_builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                       for (int i=0 ; i<81 ; i++){
+                           if(unsolved[i/9][i%9] == 0){
+                               sudokugrid[i/9][i%9].setTextSize(TypedValue.COMPLEX_UNIT_SP, 24);
+                               sudokugrid[i/9][i%9].setText(" ");
+                           }
+                       }
+                    }
+                });
+                AlertDialog reset_box = reset_box_builder.create();
+                reset_box.show();
+                break;
             case R.id.button00:
                 if(unsolved[0][0] != 0) break ;
                 activei=0;
@@ -1087,11 +1146,15 @@ public class S5 extends AppCompatActivity implements View.OnClickListener{
                 GridColorChange(activei,activej);
                 break;
             case R.id.digitButton1:
+                if(solved_state){
+                    Toast.makeText(getApplicationContext(),"Sudoku already solved",Toast.LENGTH_SHORT).show();
+                    break;
+                }
                 if(activej==-1) break ;
                 if(markingState == true){
                     if(markings[activei][activej][1]==true) markings[activei][activej][1] = false;
                     else markings[activei][activej][1] = true ;
-                    sudokugrid[activei][activej].setTextSize(TypedValue.COMPLEX_UNIT_SP, 12); ;
+                    sudokugrid[activei][activej].setTextSize(TypedValue.COMPLEX_UNIT_SP, 10); ;
                     sudokugrid[activei][activej].setText(GenerateMarkings(activei, activej)) ;
                 }
                 else{
@@ -1105,11 +1168,15 @@ public class S5 extends AppCompatActivity implements View.OnClickListener{
                 check_solved();
                 break;
             case R.id.digitButton2:
+                if(solved_state){
+                    Toast.makeText(getApplicationContext(),"Sudoku already solved",Toast.LENGTH_SHORT).show();
+                    break;
+                }
                 if(activej==-1) break ;
                 if(markingState == true){
                     if(markings[activei][activej][2]==true) markings[activei][activej][2] = false;
                     else markings[activei][activej][2] = true ;
-                    sudokugrid[activei][activej].setTextSize(TypedValue.COMPLEX_UNIT_SP, 12); ;
+                    sudokugrid[activei][activej].setTextSize(TypedValue.COMPLEX_UNIT_SP, 10); ;
                     sudokugrid[activei][activej].setText(GenerateMarkings(activei, activej)) ;
                 }
                 else{
@@ -1123,11 +1190,15 @@ public class S5 extends AppCompatActivity implements View.OnClickListener{
                 check_solved();
                 break;
             case R.id.digitButton3:
+                if(solved_state){
+                    Toast.makeText(getApplicationContext(),"Sudoku already solved",Toast.LENGTH_SHORT).show();
+                    break;
+                }
                 if(activej==-1) break ;
                 if(markingState == true){
                     if(markings[activei][activej][3]==true) markings[activei][activej][3] = false;
                     else markings[activei][activej][3] = true ;
-                    sudokugrid[activei][activej].setTextSize(TypedValue.COMPLEX_UNIT_SP, 12); ;
+                    sudokugrid[activei][activej].setTextSize(TypedValue.COMPLEX_UNIT_SP, 10); ;
                     sudokugrid[activei][activej].setText(GenerateMarkings(activei, activej)) ;
                 }
                 else{
@@ -1141,11 +1212,15 @@ public class S5 extends AppCompatActivity implements View.OnClickListener{
                 check_solved();
                 break;
             case R.id.digitButton4:
+                if(solved_state){
+                    Toast.makeText(getApplicationContext(),"Sudoku already solved",Toast.LENGTH_SHORT).show();
+                    break;
+                }
                 if(activej==-1) break ;
                 if(markingState == true){
                     if(markings[activei][activej][4]==true) markings[activei][activej][4] = false;
                     else markings[activei][activej][4] = true ;
-                    sudokugrid[activei][activej].setTextSize(TypedValue.COMPLEX_UNIT_SP, 12); ;
+                    sudokugrid[activei][activej].setTextSize(TypedValue.COMPLEX_UNIT_SP, 10); ;
                     sudokugrid[activei][activej].setText(GenerateMarkings(activei, activej)) ;
                 }
                 else{
@@ -1159,11 +1234,15 @@ public class S5 extends AppCompatActivity implements View.OnClickListener{
                 check_solved();
                 break;
             case R.id.digitButton5:
+                if(solved_state){
+                    Toast.makeText(getApplicationContext(),"Sudoku already solved",Toast.LENGTH_SHORT).show();
+                    break;
+                }
                 if(activej==-1) break ;
                 if(markingState == true){
                     if(markings[activei][activej][5]==true) markings[activei][activej][5] = false;
                     else markings[activei][activej][5] = true ;
-                    sudokugrid[activei][activej].setTextSize(TypedValue.COMPLEX_UNIT_SP, 12); ;
+                    sudokugrid[activei][activej].setTextSize(TypedValue.COMPLEX_UNIT_SP, 10); ;
                     sudokugrid[activei][activej].setText(GenerateMarkings(activei, activej)) ;
                 }
                 else{
@@ -1177,11 +1256,15 @@ public class S5 extends AppCompatActivity implements View.OnClickListener{
                 check_solved();
                 break;
             case R.id.digitButton6:
+                if(solved_state){
+                    Toast.makeText(getApplicationContext(),"Sudoku already solved",Toast.LENGTH_SHORT).show();
+                    break;
+                }
                 if(activej==-1) break ;
                 if(markingState == true){
                     if(markings[activei][activej][6]==true) markings[activei][activej][6] = false;
                     else markings[activei][activej][6] = true ;
-                    sudokugrid[activei][activej].setTextSize(TypedValue.COMPLEX_UNIT_SP, 12); ;
+                    sudokugrid[activei][activej].setTextSize(TypedValue.COMPLEX_UNIT_SP, 10); ;
                     sudokugrid[activei][activej].setText(GenerateMarkings(activei, activej)) ;
                 }
                 else{
@@ -1195,11 +1278,15 @@ public class S5 extends AppCompatActivity implements View.OnClickListener{
                 check_solved();
                 break;
             case R.id.digitButton7:
+                if(solved_state){
+                    Toast.makeText(getApplicationContext(),"Sudoku already solved",Toast.LENGTH_SHORT).show();
+                    break;
+                }
                 if(activej==-1) break ;
                 if(markingState == true){
                     if(markings[activei][activej][7]==true) markings[activei][activej][7] = false;
                     else markings[activei][activej][7] = true ;
-                    sudokugrid[activei][activej].setTextSize(TypedValue.COMPLEX_UNIT_SP, 12); ;
+                    sudokugrid[activei][activej].setTextSize(TypedValue.COMPLEX_UNIT_SP, 10); ;
                     sudokugrid[activei][activej].setText(GenerateMarkings(activei, activej)) ;
                 }
                 else{
@@ -1213,11 +1300,15 @@ public class S5 extends AppCompatActivity implements View.OnClickListener{
                 check_solved();
                 break;
             case R.id.digitButton8:
+                if(solved_state){
+                    Toast.makeText(getApplicationContext(),"Sudoku already solved",Toast.LENGTH_SHORT).show();
+                    break;
+                }
                 if(activej==-1) break ;
                 if(markingState == true){
                     if(markings[activei][activej][8]==true) markings[activei][activej][8] = false;
                     else markings[activei][activej][8] = true ;
-                    sudokugrid[activei][activej].setTextSize(TypedValue.COMPLEX_UNIT_SP, 12); ;
+                    sudokugrid[activei][activej].setTextSize(TypedValue.COMPLEX_UNIT_SP, 10); ;
                     sudokugrid[activei][activej].setText(GenerateMarkings(activei, activej)) ;
                 }
                 else{
@@ -1231,11 +1322,15 @@ public class S5 extends AppCompatActivity implements View.OnClickListener{
                 check_solved();
                 break;
             case R.id.digitButton9:
+                if(solved_state){
+                    Toast.makeText(getApplicationContext(),"Sudoku already solved",Toast.LENGTH_SHORT).show();
+                    break;
+                }
                 if(activej==-1) break ;
                 if(markingState == true){
                     if(markings[activei][activej][9]==true) markings[activei][activej][9] = false;
                     else markings[activei][activej][9] = true ;
-                    sudokugrid[activei][activej].setTextSize(TypedValue.COMPLEX_UNIT_SP, 12); ;
+                    sudokugrid[activei][activej].setTextSize(TypedValue.COMPLEX_UNIT_SP, 10); ;
                     sudokugrid[activei][activej].setText(GenerateMarkings(activei, activej)) ;
                 }
                 else{

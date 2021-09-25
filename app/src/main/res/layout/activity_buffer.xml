@@ -9,8 +9,9 @@
 
   <pl.droidsonroids.gif.GifImageView
       android:id="@+id/gifImageView"
-      android:layout_width="269dp"
-      android:layout_height="354dp"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:scaleType="centerCrop"
       android:src="@drawable/loading"
       android:visibility="visible"
       app:layout_constraintBottom_toBottomOf="parent"

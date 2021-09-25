@@ -23,7 +23,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         MainApplication app = (MainApplication) getApplication();
-        app.ring.start();
+        if(app.ring_start) {
+            app.ring.start();
+        }
         SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
         resume_button = sharedPreferences.getBoolean(RESU,false);
 
@@ -33,7 +35,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         MainApplication app = (MainApplication) getApplication();
-        app.ring.start();
+        if(app.ring_start) {
+            app.ring.start();
+        }
     }
 
     @Override
@@ -57,7 +61,6 @@ public class MainActivity extends AppCompatActivity {
 
 
         MainApplication application = (MainApplication) getApplication();
-        application.ring.start();
         application.ring.setLooping(true);
 
 
@@ -100,8 +103,16 @@ public class MainActivity extends AppCompatActivity {
         aboutUsBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent OpenaboutUs = new Intent(getApplicationContext(),com.example.sudokusolver.Instructions.class) ;
+                Intent OpenaboutUs = new Intent(getApplicationContext(),com.example.sudokusolver.AboutUs.class) ;
                 startActivity(OpenaboutUs);
+            }
+        });
+        settingsBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent openSettings = new Intent(getApplicationContext(),com.example.sudokusolver.Settings.class) ;
+                startActivity(openSettings);
+
             }
         });
     }

@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.RadioButton;
@@ -16,11 +17,14 @@ import java.util.Random;
 
 public class S4beta extends AppCompatActivity {
 
-    Button displayData;
-    RadioGroup radioGroup;
-    RadioButton radioButton;
     Double output = 0.0;
     ImageButton menuBtn ;
+    ImageButton generateSudoku ;
+    ImageButton easyDifficulty ;
+    ImageButton mediumDifficulty ;
+    ImageButton hardDifficulty ;
+
+    int difficulty = 0 ;
 
     int[][] board = new int[][]{
             {1, 2, 3, 4, 5, 6, 7, 8, 9},
@@ -43,14 +47,19 @@ public class S4beta extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         MainApplication app = (MainApplication) getApplication();
-        app.ring.start();
+        if(app.ring_start) {
+            app.ring.start();
+        }
+
     }
 
     @Override
     protected void onResume() {
         super.onResume();
         MainApplication app = (MainApplication) getApplication();
-        app.ring.start();
+        if(app.ring_start) {
+            app.ring.start();
+        }
     }
 
     @Override
@@ -67,8 +76,10 @@ public class S4beta extends AppCompatActivity {
         this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         menuBtn = (ImageButton) findViewById(R.id.menuBtn) ;
-        displayData = (Button) findViewById(R.id.gotoMainScreenS4beta);
-        radioGroup = (RadioGroup) findViewById(R.id.radioGroup);
+        generateSudoku = (ImageButton) findViewById(R.id.generatesudoku);
+        easyDifficulty = (ImageButton) findViewById(R.id.easydifficulty);
+        mediumDifficulty = (ImageButton) findViewById(R.id.mediumdifficulty);
+        hardDifficulty = (ImageButton) findViewById(R.id.harddifficulty);
 
         menuBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -78,19 +89,46 @@ public class S4beta extends AppCompatActivity {
             }
         });
 
+        easyDifficulty.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                difficulty=1 ;
+                generateSudoku.setImageResource(R.drawable.generatesudokugreen);
+            }
+        });
 
-        displayData.setOnClickListener(new View.OnClickListener() {
+        mediumDifficulty.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                difficulty=2 ;
+                generateSudoku.setImageResource(R.drawable.generatesudokuyellow);
+            }
+        });
+
+        hardDifficulty.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                difficulty=3 ;
+                generateSudoku.setImageResource(R.drawable.generatesudokured);
+            }
+        });
+
+
+        generateSudoku.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 solvedsudoku = "";
                 unsolvedsudoku = "";
 
-                try {
-                    output = getlevel();
-                } catch (Exception e) {
-                    Toast.makeText(S4beta.this, "PLEASE SELECT ONE", Toast.LENGTH_SHORT).show();
-                }
+                output = getlevel() ;
+
+//                try {
+//                    output = getlevel();
+//                } catch (Exception e) {
+//                    Toast.makeText(S4beta.this, "PLEASE SELECT ONE", Toast.LENGTH_SHORT).show();
+//                }
+
                 for (int i = 0; i < 9; i++) {
                     for (int j = 0; j < 9; j++) {
                         solvedsudoku = solvedsudoku + board[i][j];
@@ -223,15 +261,13 @@ public class S4beta extends AppCompatActivity {
 
     public Double getlevel() {
 
-        int radioId = radioGroup.getCheckedRadioButtonId();
         Double output = 0.0;
-        radioButton = findViewById(radioId);
 
-        if (radioButton.getText().toString().equals("Easy")) {
+        if (difficulty==1) {
             output = 0.98;
-        } else if (radioButton.getText().toString().equals("Medium")) {
+        } else if (difficulty==2) {
             output = 0.375;
-        } else if (radioButton.getText().toString().equals("Hard")) {
+        } else if (difficulty==3) {
             output = 0.25;
         }
         return output;

@@ -39,14 +39,19 @@ public class S4 extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         MainApplication app = (MainApplication) getApplication();
-        app.ring.start();
+        if(app.ring_start) {
+            app.ring.start();
+        }
+
     }
 
     @Override
     protected void onResume() {
         super.onResume();
         MainApplication app = (MainApplication) getApplication();
-        app.ring.start();
+        if(app.ring_start) {
+            app.ring.start();
+        }
     }
 
     @Override

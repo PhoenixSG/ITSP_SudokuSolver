@@ -1,16 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fillViewport="true"
-    android:padding="16dp">
+    android:background="@drawable/bg2"
+    tools:context=".Instructions">
 
 
     <TextView
-        android:id="@+id/textView5"
-        android:layout_width="match_parent"
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text=""
-        android:textSize="24sp"
-        />
-</ScrollView>
+        android:fontFamily="sans-serif-black"
+        android:text="Instructions"
+        android:textColor="#000000"
+        android:textSize="34sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:fontFamily="sans-serif-medium"
+        android:scrollbars="vertical"
+        android:shadowColor="#FFFFFF"
+        android:text="Hello and welcome to the Sudoku Solver.\nThis app allows you to not only play the game of sudoku you all love, but also digitize your own sudoku boards and solve the game interactively in our app. You can get hints and undo your steps throughout the process. You can even get a full solution to the puzzles.\n\nThere are two ways you can use this app. \n This app can function as a simple digital sudoku game. You can choose the difficulty and it will generate a brand new unsolved grid for you. You can solve it in the app and take hints or view the solution whenever you like. You can track the time taken by you to solve different puzzles and even take notes to help you in the solving process.\nThe second and more special feature of this app is to enable you to click a picture of any sudoku which you have been solving, and continue your solving process in the app. You can do all that you could in the previous mode, like getting hints, taking small notes, or even getting the full solution.\n\n So, what are you waiting for...Let’s go!! "
+        android:textAlignment="center"
+        android:textColor="#000000"
+        android:textColorHighlight="#FFFFFF"
+        android:textColorHint="#FFFFFF"
+        android:textColorLink="#FFFFFF"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/buttoninstructions2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView3" />
+
+    <Button
+        android:id="@+id/buttoninstructions2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="How To Play Sudoku?"
+        android:textColor="#040404"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView6" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

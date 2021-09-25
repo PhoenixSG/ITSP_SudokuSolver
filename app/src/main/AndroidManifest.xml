@@ -16,7 +16,9 @@
         android:screenOrientation="portrait"
         android:supportsRtl="true"
         android:theme="@style/Theme.SudokuSolver">
-        <activity android:name=".AboutUs"></activity>
+        <activity android:name=".Instructions2"></activity>
+        <activity android:name=".Settings" />
+        <activity android:name=".AboutUs" />
         <activity android:name=".Instructions" />
         <activity android:name=".MainActivity" />
         <activity android:name=".FinishSplash" />

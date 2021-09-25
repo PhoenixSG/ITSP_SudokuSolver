@@ -1,23 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fillViewport="true"
-    android:padding="16dp">
+    android:background="@drawable/bg2"
+    tools:context=".Instructions">
 
 
     <TextView
-        android:id="@+id/textView5"
-        android:layout_width="match_parent"
+        android:id="@+id/textViewaboutheading"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="I'm trying to make an ImageView that holds a gallery of images. By touching the user request to load the next image. If the next image isn't found in the server or takes time to load I need the old image to be empty.
+        android:fontFamily="sans-serif-black"
+        android:text="About Us"
+        android:textColor="#000000"
+        android:textSize="34sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-setVisibility(View.GONE) or setVisibility(View.INVISIBLE) don't work for me because when invisible/gone I stop the onTouch() detecting (and the user is locked to current image).
+    <TextView
+        android:id="@+id/textViewaboutus"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:fontFamily="sans-serif-medium"
+        android:scrollbars="vertical"
+        android:shadowColor="#FFFFFF"
+        android:text="This app was created as part of the Institute Technical Summer Project-2021, IIT Bombay, by 4 first-year UG CSE students. We are glad to have made it this far. During this whole project we have learnt not only the technical aspects of building a fully-functional app, but also the managerial and social aspects of working as a team.\n\n During this project we learnt about Android Development, Deep Learning with Neural Networks, Computer Vision, REST APIs and basics of web development.\n\nWe are proud to present you the Sudoku Solver.\nAny comments/suggestions are most welcome at\nsomething@gmail.com\n\nThank You for Playing!\n\nSojitra Poojan Dineshkumar\nHarshvardhan Agarwal\nShrey Bavishi\nShashwat Garg"
+        android:textAlignment="center"
+        android:textColor="#000000"
+        android:textColorHighlight="#FFFFFF"
+        android:textColorHint="#FFFFFF"
+        android:textColorLink="#FFFFFF"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewaboutheading" />
 
-How can I make the ImageView to load a empty bitmap or clear (remove) current bitmap?aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
-        android:textSize="24sp"
-        />
-</ScrollView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
