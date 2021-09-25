@@ -1,5 +1,6 @@
 package com.example.sudokusolver;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.graphics.Matrix;
 import android.os.Bundle;
@@ -30,6 +31,27 @@ import java.io.File;
 
 public class S4 extends AppCompatActivity {
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        MainApplication app = (MainApplication) getApplication();
+        app.ring.start();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        MainApplication app = (MainApplication) getApplication();
+        app.ring.start();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        MainApplication app = (MainApplication) getApplication();
+        app.ring.pause();
+    }
+
     private int REQUEST_CODE_PERMISSIONS = 101;
     private String[] REQUIRED_PERMISSIONS = new String[]{"android.permission.CAMERA", "android.permission.WRITE_EXTERNAL_STORAGE"};
 
@@ -39,6 +61,7 @@ public class S4 extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_s4);
+        this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
 
         tv = (TextureView) findViewById(R.id.textureView);
