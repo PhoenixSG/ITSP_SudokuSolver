@@ -267,7 +267,7 @@ public class S4beta extends AppCompatActivity {
         Double output = 0.0;
 
         if (difficulty==1) {
-            output = 0.98;
+            output = 0.5;
         } else if (difficulty==2) {
             output = 0.375;
         } else if (difficulty==3) {

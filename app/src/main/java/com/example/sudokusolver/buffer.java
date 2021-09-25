@@ -152,7 +152,8 @@ public class buffer extends AppCompatActivity {
 
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(buffer.this, "Fail to get response = " + error, Toast.LENGTH_SHORT).show();
+                Toast.makeText(buffer.this, "Fail to get response = " + error +" \n Please try again.", Toast.LENGTH_SHORT).show();
+                finish();
             }
         }) {
 
