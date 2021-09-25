@@ -1,9 +1,11 @@
 package com.example.sudokusolver;
 
 import android.app.Application;
+import android.content.SharedPreferences;
 import android.media.MediaPlayer;
 
 public class MainApplication extends Application {
+
 
     MediaPlayer ring;
 
@@ -12,4 +14,5 @@ public class MainApplication extends Application {
         super.onCreate();
         ring = MediaPlayer.create(MainApplication.this,R.raw.ring);
     }
+
 }

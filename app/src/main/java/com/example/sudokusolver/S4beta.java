@@ -78,6 +78,7 @@ public class S4beta extends AppCompatActivity {
             }
         });
 
+
         displayData.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -108,6 +109,7 @@ public class S4beta extends AppCompatActivity {
                     Intent opensudoku = new Intent(getApplicationContext(), com.example.sudokusolver.S5.class);
                     opensudoku.putExtra("solved", solvedsudoku);
                     opensudoku.putExtra("unsolved", unsolvedsudoku);
+                    opensudoku.putExtra("fromS4beta",true);
                     startActivity(opensudoku);
                 }
 
@@ -226,7 +228,7 @@ public class S4beta extends AppCompatActivity {
         radioButton = findViewById(radioId);
 
         if (radioButton.getText().toString().equals("Easy")) {
-            output = 0.5;
+            output = 0.98;
         } else if (radioButton.getText().toString().equals("Medium")) {
             output = 0.375;
         } else if (radioButton.getText().toString().equals("Hard")) {

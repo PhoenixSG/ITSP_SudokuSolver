@@ -6,11 +6,13 @@ import android.os.Bundle;
 import android.util.Base64;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -18,6 +20,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.File;
@@ -31,7 +34,29 @@ import java.util.Map;
 
 
 public class buffer extends AppCompatActivity {
+    @Override
+    protected void onStart() {
+        super.onStart();
+        MainApplication app = (MainApplication) getApplication();
+        app.ring.start();
+    }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        MainApplication app = (MainApplication) getApplication();
+        app.ring.start();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        MainApplication app = (MainApplication) getApplication();
+        app.ring.pause();
+    }
+
+
+    private static final int MY_SOCKET_TIMEOUT_MS = 50000;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,16 +113,14 @@ public class buffer extends AppCompatActivity {
 //        }
 //
 
-        encodedfile="eufhu";
+
 
 
         RequestQueue queue = Volley.newRequestQueue(this);
         String url = "https://sudoku-grid-digit-recognition.herokuapp.com/";
-        TextView textView = (TextView) findViewById(R.id.textView);
-
+        ImageView gif=(ImageView)findViewById(R.id.gifImageView);
 
         Map<String, String> postParam = new HashMap<String, String>();
-
         postParam.put("image", encodedfile);
 
 
@@ -107,7 +130,17 @@ public class buffer extends AppCompatActivity {
 
                     @Override
                     public void onResponse(JSONObject response) {
-                        textView.setText(response.toString());
+//                        textView.setText(response.toString());
+//                        gif.setImageDrawable(null);
+
+                        Intent gotobuffer2 = new Intent(getApplicationContext(),com.example.sudokusolver.buffer2.class) ;
+                        try {
+                            gotobuffer2.putExtra("predictions", (String) response.get("predictions"));
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        startActivity(gotobuffer2);
+
                     }
                 }, new Response.ErrorListener() {
 
@@ -130,6 +163,11 @@ public class buffer extends AppCompatActivity {
 
         };
 
+        jsonObjReq.setRetryPolicy(new DefaultRetryPolicy(
+                MY_SOCKET_TIMEOUT_MS,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+
         // Adding request to request queue
         queue.add(jsonObjReq);
 
@@ -139,16 +177,6 @@ public class buffer extends AppCompatActivity {
     } */
 
 
-        Button buttonbuffer = (Button) findViewById(R.id.buttonbuffer);
-
-        buttonbuffer.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent buffer2activity = new Intent(getApplicationContext(), com.example.sudokusolver.buffer2.class);
-                buffer2activity.putExtra("unsolved_sudoku", "020070107009800004051902000070008039000094080500030402043000800960080000007000903");
-                startActivity(buffer2activity);
-            }
-        });
 
     }
 }

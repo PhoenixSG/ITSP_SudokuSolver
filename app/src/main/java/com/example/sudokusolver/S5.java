@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.os.CountDownTimer;
 import android.content.res.ColorStateList;
@@ -23,6 +24,11 @@ import java.util.Timer;
 
 
 public class S5 extends AppCompatActivity implements View.OnClickListener{
+
+    public static final String SHARED_PREFS = "sharedPrefs";
+    public static final String TEXT = "text",RESU = "resu";
+    public static boolean resume ;
+    private String text;
 
     @Override
     protected void onStart() {
@@ -43,6 +49,16 @@ public class S5 extends AppCompatActivity implements View.OnClickListener{
         super.onPause();
         MainApplication app = (MainApplication) getApplication();
         app.ring.pause();
+
+        text = example_solved + "-" + example_unsolved + "-" ;
+        for(int i=0 ; i<81 ; i++){
+            if (sudokugrid[i / 9][i % 9].getText().toString() != " ") {
+                text = text + sudokugrid[i / 9][i % 9].getText().toString() + ";";
+            }
+            else    text = text +"0;";
+        }
+        text = text +"-" + counter;
+        savedata();
     }
 
     static boolean[][][] markings = new boolean[9][9][10] ;
@@ -52,6 +68,7 @@ public class S5 extends AppCompatActivity implements View.OnClickListener{
     ImageView[][] sdg_block = new ImageView[9][9];
     ImageButton[] digitButton = new ImageButton[10];
     int[][] unsolved = new int[9][9];
+    int[][] solving= new int[9][9];
     int[][] solved = new int[9][9];
     static boolean[][] predefined_numbers = new boolean[9][9];
     static boolean markingState = false ;
@@ -63,6 +80,9 @@ public class S5 extends AppCompatActivity implements View.OnClickListener{
     ImageButton notesBtn ;
     static String example_solved;
     static String example_unsolved;
+    static String current;
+    static String[] cell_digit;
+    static String string_timer;
 
 
     TextView Timer;
@@ -121,6 +141,21 @@ public class S5 extends AppCompatActivity implements View.OnClickListener{
         sdg_block[i][j].setImageResource(R.drawable.block7);
     }
 
+    void check_solved(){
+        for(int i=0;i<81;i++){
+            if(solving[i/9][i%9]==solved[i/9][i%9]){
+                if(i==80){
+                    resume=false;
+                    Toast.makeText(getApplicationContext(),"You have solved",Toast.LENGTH_SHORT).show();
+                    Intent Back2menu = new Intent(getApplicationContext(),com.example.sudokusolver.FinishSplash.class) ;
+                    startActivity(Back2menu);
+                }
+            }
+            else{
+                break;
+            }
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -128,11 +163,26 @@ public class S5 extends AppCompatActivity implements View.OnClickListener{
         setContentView(R.layout.activity_s5);
         this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
-        example_unsolved = getIntent().getStringExtra("unsolved");
-        example_solved = getIntent().getStringExtra("solved");
+
+        if(getIntent().getBooleanExtra("fromS4beta",true)) {
+            resume = true;
+            example_unsolved = getIntent().getStringExtra("unsolved");
+            example_solved = getIntent().getStringExtra("solved");
+        }
+        else {
+            loaddata();
+            String[] part = text.split("-");
+            example_solved = part[0];
+            example_unsolved = part[1];
+            current = part[2];
+            string_timer = part[3];
+            cell_digit = current.split(";");
+        }
+
         for(int i=0 ; i<81 ; i++){
             int a = example_unsolved.charAt(i) - '0';
             unsolved[i/9][i%9] =  a;
+            solving[i/9][i%9]=a;
         }
         for(int i=0 ; i<81 ; i++){
             int a = example_solved.charAt(i) - '0';
@@ -423,6 +473,10 @@ public class S5 extends AppCompatActivity implements View.OnClickListener{
         eraseBtn.setOnClickListener(this);
         notesBtn.setOnClickListener(this);
 
+        if(!getIntent().getBooleanExtra("fromS4beta",true)){
+            counter = Integer.valueOf(string_timer);
+        }
+
         Timer = (TextView) findViewById(R.id.textView2) ;
         if(!started) {
             started=true ;
@@ -445,6 +499,34 @@ public class S5 extends AppCompatActivity implements View.OnClickListener{
                     sudokugrid[i][j].setText("" + unsolved[i][j]);
                     sdg_block[i][j].setImageResource(R.drawable.block3);
                 }
+                else {
+                    if(getIntent().getBooleanExtra("fromS4beta",true)) {
+                        sudokugrid[i][j].setTextSize(TypedValue.COMPLEX_UNIT_SP, 36);
+                        sudokugrid[i][j].setText(" ");
+                        sdg_block[i][j].setImageResource(R.drawable.block2);
+                    }
+                    else{
+                        if(cell_digit[i*9+j].length() != 1){
+                            sudokugrid[i][j].setTextSize(TypedValue.COMPLEX_UNIT_SP, 12);
+                            sudokugrid[i][j].setText(cell_digit[i*9+j]+"");
+                            sdg_block[i][j].setImageResource(R.drawable.block2);
+                        }
+                        else if (!cell_digit[i*9 +j].contains("0")){
+                            sudokugrid[i][j].setTextSize(TypedValue.COMPLEX_UNIT_SP, 36);
+                            sudokugrid[i][j].setText(cell_digit[i*9+j]+"");
+                            sdg_block[i][j].setImageResource(R.drawable.block2);
+                        }
+                        else {
+                            sudokugrid[i][j].setTextSize(TypedValue.COMPLEX_UNIT_SP, 36);
+                            sudokugrid[i][j].setText(" ");
+                            sdg_block[i][j].setImageResource(R.drawable.block2);
+                        }
+
+                    }
+
+                }
+
+
 
             }
         }
@@ -1006,10 +1088,6 @@ public class S5 extends AppCompatActivity implements View.OnClickListener{
                 break;
             case R.id.digitButton1:
                 if(activej==-1) break ;
-                if(predefined_numbers[activei][activej]==true){
-                    Toast.makeText(getApplicationContext(),"Pre-defined cell cannot be changed",Toast.LENGTH_SHORT).show();
-                    break;
-                }
                 if(markingState == true){
                     if(markings[activei][activej][1]==true) markings[activei][activej][1] = false;
                     else markings[activei][activej][1] = true ;
@@ -1023,13 +1101,11 @@ public class S5 extends AppCompatActivity implements View.OnClickListener{
                     sudokugrid[activei][activej].setTextSize(TypedValue.COMPLEX_UNIT_SP, 36);
                     sudokugrid[activei][activej].setText("1");
                 }
+                solving[activei][activej]=1;
+                check_solved();
                 break;
             case R.id.digitButton2:
                 if(activej==-1) break ;
-                if(predefined_numbers[activei][activej]==true){
-                    Toast.makeText(getApplicationContext(),"Pre-defined cell cannot be changed",Toast.LENGTH_SHORT).show();
-                    break;
-                }
                 if(markingState == true){
                     if(markings[activei][activej][2]==true) markings[activei][activej][2] = false;
                     else markings[activei][activej][2] = true ;
@@ -1043,13 +1119,11 @@ public class S5 extends AppCompatActivity implements View.OnClickListener{
                     sudokugrid[activei][activej].setTextSize(TypedValue.COMPLEX_UNIT_SP, 36);
                     sudokugrid[activei][activej].setText("2");
                 }
+                solving[activei][activej]=2;
+                check_solved();
                 break;
             case R.id.digitButton3:
                 if(activej==-1) break ;
-                if(predefined_numbers[activei][activej]==true){
-                    Toast.makeText(getApplicationContext(),"Pre-defined cell cannot be changed",Toast.LENGTH_SHORT).show();
-                    break;
-                }
                 if(markingState == true){
                     if(markings[activei][activej][3]==true) markings[activei][activej][3] = false;
                     else markings[activei][activej][3] = true ;
@@ -1063,13 +1137,11 @@ public class S5 extends AppCompatActivity implements View.OnClickListener{
                     sudokugrid[activei][activej].setTextSize(TypedValue.COMPLEX_UNIT_SP, 36);
                     sudokugrid[activei][activej].setText("3");
                 }
+                solving[activei][activej]=3;
+                check_solved();
                 break;
             case R.id.digitButton4:
                 if(activej==-1) break ;
-                if(predefined_numbers[activei][activej]==true){
-                    Toast.makeText(getApplicationContext(),"Pre-defined cell cannot be changed",Toast.LENGTH_SHORT).show();
-                    break;
-                }
                 if(markingState == true){
                     if(markings[activei][activej][4]==true) markings[activei][activej][4] = false;
                     else markings[activei][activej][4] = true ;
@@ -1083,13 +1155,11 @@ public class S5 extends AppCompatActivity implements View.OnClickListener{
                     sudokugrid[activei][activej].setTextSize(TypedValue.COMPLEX_UNIT_SP, 36);
                     sudokugrid[activei][activej].setText("4");
                 }
+                solving[activei][activej]=4;
+                check_solved();
                 break;
             case R.id.digitButton5:
                 if(activej==-1) break ;
-                if(predefined_numbers[activei][activej]==true){
-                    Toast.makeText(getApplicationContext(),"Pre-defined cell cannot be changed",Toast.LENGTH_SHORT).show();
-                    break;
-                }
                 if(markingState == true){
                     if(markings[activei][activej][5]==true) markings[activei][activej][5] = false;
                     else markings[activei][activej][5] = true ;
@@ -1103,13 +1173,11 @@ public class S5 extends AppCompatActivity implements View.OnClickListener{
                     sudokugrid[activei][activej].setTextSize(TypedValue.COMPLEX_UNIT_SP, 36);
                     sudokugrid[activei][activej].setText("5");
                 }
+                solving[activei][activej]=5;
+                check_solved();
                 break;
             case R.id.digitButton6:
                 if(activej==-1) break ;
-                if(predefined_numbers[activei][activej]==true){
-                    Toast.makeText(getApplicationContext(),"Pre-defined cell cannot be changed",Toast.LENGTH_SHORT).show();
-                    break;
-                }
                 if(markingState == true){
                     if(markings[activei][activej][6]==true) markings[activei][activej][6] = false;
                     else markings[activei][activej][6] = true ;
@@ -1123,13 +1191,11 @@ public class S5 extends AppCompatActivity implements View.OnClickListener{
                     sudokugrid[activei][activej].setTextSize(TypedValue.COMPLEX_UNIT_SP, 36);
                     sudokugrid[activei][activej].setText("6");
                 }
+                solving[activei][activej]=6;
+                check_solved();
                 break;
             case R.id.digitButton7:
                 if(activej==-1) break ;
-                if(predefined_numbers[activei][activej]==true){
-                    Toast.makeText(getApplicationContext(),"Pre-defined cell cannot be changed",Toast.LENGTH_SHORT).show();
-                    break;
-                }
                 if(markingState == true){
                     if(markings[activei][activej][7]==true) markings[activei][activej][7] = false;
                     else markings[activei][activej][7] = true ;
@@ -1143,13 +1209,11 @@ public class S5 extends AppCompatActivity implements View.OnClickListener{
                     sudokugrid[activei][activej].setTextSize(TypedValue.COMPLEX_UNIT_SP, 36);
                     sudokugrid[activei][activej].setText("7");
                 }
+                solving[activei][activej]=7;
+                check_solved();
                 break;
             case R.id.digitButton8:
                 if(activej==-1) break ;
-                if(predefined_numbers[activei][activej]==true){
-                    Toast.makeText(getApplicationContext(),"Pre-defined cell cannot be changed",Toast.LENGTH_SHORT).show();
-                    break;
-                }
                 if(markingState == true){
                     if(markings[activei][activej][8]==true) markings[activei][activej][8] = false;
                     else markings[activei][activej][8] = true ;
@@ -1163,13 +1227,11 @@ public class S5 extends AppCompatActivity implements View.OnClickListener{
                     sudokugrid[activei][activej].setTextSize(TypedValue.COMPLEX_UNIT_SP, 36);
                     sudokugrid[activei][activej].setText("8");
                 }
+                solving[activei][activej]=8;
+                check_solved();
                 break;
             case R.id.digitButton9:
                 if(activej==-1) break ;
-                if(predefined_numbers[activei][activej]==true){
-                    Toast.makeText(getApplicationContext(),"Pre-defined cell cannot be changed",Toast.LENGTH_SHORT).show();
-                    break;
-                }
                 if(markingState == true){
                     if(markings[activei][activej][9]==true) markings[activei][activej][9] = false;
                     else markings[activei][activej][9] = true ;
@@ -1183,7 +1245,24 @@ public class S5 extends AppCompatActivity implements View.OnClickListener{
                     sudokugrid[activei][activej].setTextSize(TypedValue.COMPLEX_UNIT_SP, 36);
                     sudokugrid[activei][activej].setText("9");
                 }
+                solving[activei][activej]=9;
+                check_solved();
                 break;
         }
+    }
+
+    public void savedata(){
+        SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS,MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(TEXT, text);
+        editor.putBoolean(RESU,resume);
+        editor.apply();
+
+    }
+
+    public void loaddata() {
+        SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
+        text = sharedPreferences.getString(TEXT, "");
+        resume = sharedPreferences.getBoolean(RESU,false);
     }
 }
