@@ -74,7 +74,7 @@ public class Settings extends AppCompatActivity {
             public void onClick(View v) {
                 Intent openFirstScreen = new Intent(getApplicationContext(), com.example.sudokusolver.MainActivity.class);
                 startActivity(openFirstScreen);
-
+                finish();
             }
         });
 

@@ -83,6 +83,7 @@ public class S4 extends AppCompatActivity {
                     Intent bufferactivity = new Intent(getApplicationContext(), com.example.sudokusolver.buffer.class);
                     bufferactivity.putExtra("imagepath", path_of_latest_image);
                     startActivity(bufferactivity);
+                    finish();
                 }
             }
         });

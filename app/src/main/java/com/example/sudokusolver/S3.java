@@ -57,6 +57,8 @@ public class S3 extends AppCompatActivity {
             public void onClick(View v) {
                 Intent openCameraScreen = new Intent(getApplicationContext(), com.example.sudokusolver.S4.class);
                 startActivity(openCameraScreen);
+                finish();
+
             }
         });
 
@@ -65,6 +67,8 @@ public class S3 extends AppCompatActivity {
             public void onClick(View v) {
                 Intent openListScreen = new Intent(getApplicationContext(), com.example.sudokusolver.S4beta.class);
                 startActivity(openListScreen);
+                finish();
+
             }
         });
 
@@ -73,6 +77,7 @@ public class S3 extends AppCompatActivity {
             public void onClick(View v) {
                 Intent openFirstScreen = new Intent(getApplicationContext(), com.example.sudokusolver.MainActivity.class);
                 startActivity(openFirstScreen);
+                finish();
             }
         });
 

@@ -43,6 +43,7 @@ public class S5 extends AppCompatActivity implements View.OnClickListener{
         if(app.ring_start) {
             app.ring.start();
         }
+        markingState=false;
     }
 
 
@@ -61,6 +62,10 @@ public class S5 extends AppCompatActivity implements View.OnClickListener{
         }
         text = text +"-" + counter;
         savedata();
+
+        if(solved_state){
+            solved_state = false;
+        }
     }
 
     static boolean[][][] markings = new boolean[9][9][10] ;
@@ -158,8 +163,8 @@ public class S5 extends AppCompatActivity implements View.OnClickListener{
                     resume=false;
                     sudokutimer.cancel();
                     Toast.makeText(getApplicationContext(),"You have solved",Toast.LENGTH_SHORT).show();
-                    Intent Back2menu = new Intent(getApplicationContext(),com.example.sudokusolver.FinishSplash.class) ;
-                    startActivity(Back2menu);
+                    Intent winningSplash = new Intent(getApplicationContext(),com.example.sudokusolver.FinishSplash.class) ;
+                    startActivity(winningSplash);
                 }
             }
             else{
@@ -581,12 +586,13 @@ public class S5 extends AppCompatActivity implements View.OnClickListener{
                                 sudokugrid[i][j].setText(""+solved[i][j]);
                             }
                         }
-                        solved_state = true;
+                        resume = false;
+                        sudokutimer.cancel();
                     }
                 });
                 AlertDialog confirmation_box = confirmation_box_builder.create();
                 confirmation_box.show();
-                sudokutimer.cancel();
+
                 break;
             case R.id.hintBtn:
                 if(solved_state){
@@ -654,6 +660,7 @@ public class S5 extends AppCompatActivity implements View.OnClickListener{
                                sudokugrid[i/9][i%9].setText(" ");
                            }
                        }
+                       resume = false;
                     }
                 });
                 AlertDialog reset_box = reset_box_builder.create();

@@ -60,8 +60,6 @@ public class MainActivity extends AppCompatActivity {
         resume_button = sharedPreferences.getBoolean(RESU,false);
 
 
-        MainApplication application = (MainApplication) getApplication();
-        application.ring.setLooping(true);
 
 
 

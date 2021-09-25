@@ -86,6 +86,7 @@ public class S4beta extends AppCompatActivity {
             public void onClick(View v) {
                 Intent openFirstScreen = new Intent(getApplicationContext(), com.example.sudokusolver.MainActivity.class);
                 startActivity(openFirstScreen);
+                finish();
             }
         });
 
@@ -149,6 +150,8 @@ public class S4beta extends AppCompatActivity {
                     opensudoku.putExtra("unsolved", unsolvedsudoku);
                     opensudoku.putExtra("fromS4beta",true);
                     startActivity(opensudoku);
+                    finish();
+
                 }
 
                 //SHOULD MOVE TO NEXT SCREEN AFTER THIS.

@@ -442,6 +442,7 @@ public class buffer2 extends AppCompatActivity implements View.OnClickListener{
                                 gotoS5.putExtra("unsolved", finalUnsolved_final);
 
                                 startActivity(gotoS5);
+                                finish();
                             }
                         }, new Response.ErrorListener() {
 

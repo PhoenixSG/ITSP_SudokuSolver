@@ -50,6 +50,7 @@ public class Instructions extends AppCompatActivity {
             public void onClick(View v) {
                  Intent intent=new Intent(getApplicationContext(), Instructions2.class);
                  startActivity(intent);
+                 finish();
             }
         });
 

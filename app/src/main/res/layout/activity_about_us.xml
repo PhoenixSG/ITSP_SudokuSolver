@@ -29,7 +29,7 @@
         android:fontFamily="sans-serif-medium"
         android:scrollbars="vertical"
         android:shadowColor="#FFFFFF"
-        android:text="This app was created as part of the Institute Technical Summer Project-2021, IIT Bombay, by 4 first-year UG CSE students. We are glad to have made it this far. During this whole project we have learnt not only the technical aspects of building a fully-functional app, but also the managerial and social aspects of working as a team.\n\n During this project we learnt about Android Development, Deep Learning with Neural Networks, Computer Vision, REST APIs and basics of web development.\n\nWe are proud to present you the Sudoku Solver.\nAny comments/suggestions are most welcome at\nsomething@gmail.com\n\nThank You for Playing!\n\nSojitra Poojan Dineshkumar\nHarshvardhan Agarwal\nShrey Bavishi\nShashwat Garg"
+        android:text="This app was created as part of the Institute Technical Summer Project-2021, IIT Bombay, by 4 first-year UG CSE students. We are glad to have made it this far. During this whole project we have learnt not only the technical aspects of building a fully-functional app, but also the managerial and social aspects of working as a team.\n\n During this project we learnt about Android Development, Deep Learning with Neural Networks, Computer Vision, REST APIs and basics of web development.\n\nWe are proud to present you the Sudoku Solver.\nAny comments/suggestions are most welcome at\nsomething@gmail.com\n\nThank You for Playing!\n\nSojitra Poojan Dineshkumar\nHarshvardhan Agarwal\nShrey Bavishi\nShashwat Garg\n\n Music: wwww.bensound.com"
         android:textAlignment="center"
         android:textColor="#000000"
         android:textColorHighlight="#FFFFFF"

@@ -12,14 +12,19 @@ public class StartSplash extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         MainApplication app = (MainApplication) getApplication();
-        app.ring.start();
+        if(app.ring_start) {
+            app.ring.start();
+        }
+
     }
 
     @Override
     protected void onResume() {
         super.onResume();
         MainApplication app = (MainApplication) getApplication();
-        app.ring.start();
+        if(app.ring_start) {
+            app.ring.start();
+        }
     }
 
     @Override
@@ -28,11 +33,16 @@ public class StartSplash extends AppCompatActivity {
         MainApplication app = (MainApplication) getApplication();
         app.ring.pause();
     }
+
+
     private static int SPLASH_SCREEN_TIME_OUT=2000;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start_splash);
+
+        MainApplication application = (MainApplication) getApplication();
+        application.ring.setLooping(true);
 
         new Handler().postDelayed(new Runnable() {
             @Override

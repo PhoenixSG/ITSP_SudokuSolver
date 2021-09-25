@@ -146,7 +146,7 @@ public class buffer extends AppCompatActivity {
                             e.printStackTrace();
                         }
                         startActivity(gotobuffer2);
-
+                        finish();
                     }
                 }, new Response.ErrorListener() {
 
