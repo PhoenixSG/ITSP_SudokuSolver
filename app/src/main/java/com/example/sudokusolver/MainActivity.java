@@ -63,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-        ImageButton resumeBtn = (ImageButton) findViewById(R.id.resumeBtn) ;
+        ImageButton resumeBtn = (ImageButton) findViewById(R.id.howtoplayBtn) ;
         ImageButton newgameBtn = (ImageButton) findViewById(R.id.newgameBtn) ;
         ImageButton instructionsBtn = (ImageButton) findViewById(R.id.instructionsBtn) ;
         ImageButton aboutUsBtn = (ImageButton) findViewById(R.id.statisticsBtn) ;

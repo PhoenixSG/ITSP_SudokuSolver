@@ -84,8 +84,8 @@ public class S4beta extends AppCompatActivity {
         menuBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent openFirstScreen = new Intent(getApplicationContext(), com.example.sudokusolver.MainActivity.class);
-                startActivity(openFirstScreen);
+//                Intent openFirstScreen = new Intent(getApplicationContext(), com.example.sudokusolver.MainActivity.class);
+//                startActivity(openFirstScreen);
                 finish();
             }
         });

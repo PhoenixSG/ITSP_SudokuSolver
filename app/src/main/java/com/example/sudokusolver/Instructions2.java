@@ -2,8 +2,11 @@ package com.example.sudokusolver;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.method.ScrollingMovementMethod;
+import android.view.View;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 public class Instructions2 extends AppCompatActivity {
@@ -42,8 +45,17 @@ public class Instructions2 extends AppCompatActivity {
         setContentView(R.layout.activity_instructions2);
 
 
-        TextView tv = (TextView) findViewById(R.id.textView8);
-        tv.setMovementMethod(new ScrollingMovementMethod());
+
+        ImageButton menuBtn2 = (ImageButton) findViewById(R.id.menuBtn2);
+
+        menuBtn2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                Intent openFirstScreen = new Intent(getApplicationContext(), com.example.sudokusolver.MainActivity.class);
+//                startActivity(openFirstScreen);
+                finish();
+            }
+        });
 
 
     }

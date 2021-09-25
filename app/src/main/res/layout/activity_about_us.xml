@@ -7,41 +7,25 @@
     android:background="@drawable/bg2"
     tools:context=".Instructions">
 
-
-    <TextView
-        android:id="@+id/textViewaboutheading"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="sans-serif-black"
-        android:text="About Us"
-        android:textColor="#000000"
-        android:textSize="34sp"
-        app:layout_constraintEnd_toEndOf="parent"
+    <ImageButton
+        android:id="@+id/menuBtn2"
+        android:layout_width="59dp"
+        android:layout_height="58dp"
+        android:backgroundTint="#00FFFFFF"
+        android:scaleType="fitCenter"
+        android:src="@drawable/backmenu_btn"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/textViewaboutus"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:fontFamily="sans-serif-medium"
-        android:scrollbars="vertical"
-        android:shadowColor="#FFFFFF"
-        android:text="This app was created as part of the Institute Technical Summer Project-2021, IIT Bombay, by 4 first-year UG CSE students. We are glad to have made it this far. During this whole project we have learnt not only the technical aspects of building a fully-functional app, but also the managerial and social aspects of working as a team.\n\n During this project we learnt about Android Development, Deep Learning with Neural Networks, Computer Vision, REST APIs and basics of web development.\n\nWe are proud to present you the Sudoku Solver.\nAny comments/suggestions are most welcome at\nsomething@gmail.com\n\nThank You for Playing!\n\nSojitra Poojan Dineshkumar\nHarshvardhan Agarwal\nShrey Bavishi\nShashwat Garg\n\n Music: wwww.bensound.com"
-        android:textAlignment="center"
-        android:textColor="#000000"
-        android:textColorHighlight="#FFFFFF"
-        android:textColorHint="#FFFFFF"
-        android:textColorLink="#FFFFFF"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
+    <ImageView
+        android:id="@+id/aboutus"
+        android:layout_width="416dp"
+        android:layout_height="686dp"
+        android:scaleType="fitCenter"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewaboutheading" />
-
+        app:layout_constraintTop_toBottomOf="@+id/menuBtn2"
+        app:srcCompat="@drawable/aboutus" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

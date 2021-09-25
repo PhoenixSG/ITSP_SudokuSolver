@@ -17,15 +17,16 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Switch
-        android:id="@+id/switch1"
-        android:layout_width="217dp"
-        android:layout_height="55dp"
-        android:layout_marginTop="184dp"
-        android:text="Music"
-        android:textSize="34sp"
-        android:checked="true"
+    <ImageButton
+        android:id="@+id/musicbtn"
+        android:layout_width="403dp"
+        android:layout_height="93dp"
+        android:layout_marginTop="150dp"
+        android:backgroundTint="#00FFFFFF"
+        android:scaleType="centerCrop"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/menuBtn2"
+        app:srcCompat="@drawable/musicbtn2" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

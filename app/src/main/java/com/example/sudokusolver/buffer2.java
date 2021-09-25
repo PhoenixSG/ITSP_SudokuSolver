@@ -29,7 +29,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class buffer2 extends AppCompatActivity implements View.OnClickListener{
-    private static final int MY_SOCKET_TIMEOUT_MS = 50000;
+    private static final int MY_SOCKET_TIMEOUT_MS = 5000000;
 
     @Override
     protected void onStart() {
@@ -434,15 +434,28 @@ public class buffer2 extends AppCompatActivity implements View.OnClickListener{
                                // textView.setText(response.toString());
 
                                 Intent gotoS5 = new Intent(getApplicationContext(),com.example.sudokusolver.S5.class) ;
+                                String solved_sudoku = null;
                                 try {
-                                    gotoS5.putExtra("solved", (String) response.get("solved_sudoku"));
+                                    solved_sudoku = (String) response.get("solved_sudoku");
+                                    gotoS5.putExtra("solved", solved_sudoku);
                                 } catch (JSONException e) {
                                     e.printStackTrace();
                                 }
                                 gotoS5.putExtra("unsolved", finalUnsolved_final);
 
-                                startActivity(gotoS5);
-                                finish();
+                                StringBuilder zero81= new StringBuilder();
+                                for(int i=0;i<81;i++) {
+                                    zero81.append('0');
+                                }
+                                Toast.makeText(buffer2.this, "Incorrect Input", Toast.LENGTH_SHORT).show();
+                                if(!solved_sudoku.equals(zero81.toString())) {
+                                    startActivity(gotoS5);
+                                    finish();
+                                }
+                                else {
+                                    Toast.makeText(buffer2.this, "Incorrect Input", Toast.LENGTH_SHORT).show();
+                                }
+
                             }
                         }, new Response.ErrorListener() {
 

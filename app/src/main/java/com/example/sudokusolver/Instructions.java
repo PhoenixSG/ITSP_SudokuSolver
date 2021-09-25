@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.text.method.ScrollingMovementMethod;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 public class Instructions extends AppCompatActivity {
@@ -40,10 +41,9 @@ public class Instructions extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_instructions);
 
-        TextView tv = (TextView) findViewById(R.id.textView6);
-        tv.setMovementMethod(new ScrollingMovementMethod());
+        ImageButton menuBtn2 = (ImageButton) findViewById(R.id.menuBtn2);
 
-        Button instructions2 = (Button) findViewById(R.id.buttoninstructions2);
+        ImageButton instructions2 = (ImageButton) findViewById(R.id.howtoplayBtn);
 
         instructions2.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -51,6 +51,16 @@ public class Instructions extends AppCompatActivity {
                  Intent intent=new Intent(getApplicationContext(), Instructions2.class);
                  startActivity(intent);
                  finish();
+            }
+        });
+
+        menuBtn2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                Intent openFirstScreen = new Intent(getApplicationContext(), com.example.sudokusolver.MainActivity.class);
+//                startActivity(openFirstScreen);
+                finish() ;
+
             }
         });
 

@@ -14,7 +14,7 @@ import static com.example.sudokusolver.S5.SHARED_PREFS;
 
 public class Settings extends AppCompatActivity {
 
-    Switch swi;
+    static Boolean MusicState=true ;
 
     @Override
     protected void onStart() {
@@ -22,9 +22,11 @@ public class Settings extends AppCompatActivity {
         MainApplication app = (MainApplication) getApplication();
         if(app.ring_start) {
             app.ring.start();
-            swi.setChecked(true);
+            MusicState = true ;
         }
-        else swi.setChecked(false);
+        else {
+            MusicState = false ;
+        }
     }
 
     @Override
@@ -33,9 +35,11 @@ public class Settings extends AppCompatActivity {
         MainApplication app = (MainApplication) getApplication();
         if(app.ring_start) {
             app.ring.start();
-            swi.setChecked(true);
+            MusicState = true ;
         }
-        else swi.setChecked(false);
+        else {
+            MusicState = false ;
+        }
     }
 
     @Override
@@ -53,28 +57,38 @@ public class Settings extends AppCompatActivity {
         MainApplication app = (MainApplication) getApplication();
 
         ImageButton menuBtn2 = (ImageButton) findViewById(R.id.menuBtn2);
+        ImageButton musicbtn = (ImageButton) findViewById(R.id.musicbtn) ;
 
-        swi = (Switch) findViewById(R.id.switch1);
-        swi.setOnClickListener(new View.OnClickListener() {
+        if(MusicState) musicbtn.setImageResource(R.drawable.musicbtn2);
+        else musicbtn.setImageResource(R.drawable.musicbtn1);
+
+        musicbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(!swi.isChecked()){
+
+                if(MusicState) {
+                    MusicState=false ;
+                    musicbtn.setImageResource(R.drawable.musicbtn1);
                     app.ring.pause();
                     app.ring_start = false;
                 }
                 else {
                     app.ring.start();
                     app.ring_start =true;
+                    MusicState=true ;
+                    musicbtn.setImageResource(R.drawable.musicbtn2);
                 }
+
 
             }
         });
         menuBtn2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent openFirstScreen = new Intent(getApplicationContext(), com.example.sudokusolver.MainActivity.class);
-                startActivity(openFirstScreen);
+//                Intent openFirstScreen = new Intent(getApplicationContext(), com.example.sudokusolver.MainActivity.class);
+//                startActivity(openFirstScreen);
                 finish();
+
             }
         });
 

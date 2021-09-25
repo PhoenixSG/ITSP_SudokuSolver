@@ -44,6 +44,10 @@ public class S5 extends AppCompatActivity implements View.OnClickListener{
             app.ring.start();
         }
         markingState=false;
+        if(solved_state_2){
+            solved_state=true;
+            solved_state_2=false;
+        }
     }
 
 
@@ -91,6 +95,7 @@ public class S5 extends AppCompatActivity implements View.OnClickListener{
     static String[] cell_digit;
     static String string_timer;
     static boolean solved_state = false;
+    static boolean solved_state_2 = false;
     CountDownTimer sudokutimer;
 
 
@@ -98,11 +103,6 @@ public class S5 extends AppCompatActivity implements View.OnClickListener{
     public int counter;
     boolean started = false ;
 
-    void after_solve(){
-        if(solved_state = true){
-            Toast.makeText(getApplicationContext(),"Sudoku already solved",Toast.LENGTH_SHORT).show();
-        }
-    }
 
     static String FormatTime(int seconds) {
         int minutes = seconds/60 ;
@@ -162,6 +162,7 @@ public class S5 extends AppCompatActivity implements View.OnClickListener{
                 if(i==80){
                     resume=false;
                     sudokutimer.cancel();
+                    solved_state_2=true;
                     Toast.makeText(getApplicationContext(),"You have solved",Toast.LENGTH_SHORT).show();
                     Intent winningSplash = new Intent(getApplicationContext(),com.example.sudokusolver.FinishSplash.class) ;
                     startActivity(winningSplash);
@@ -587,6 +588,7 @@ public class S5 extends AppCompatActivity implements View.OnClickListener{
                             }
                         }
                         resume = false;
+                        solved_state = true;
                         sudokutimer.cancel();
                     }
                 });
@@ -606,8 +608,8 @@ public class S5 extends AppCompatActivity implements View.OnClickListener{
                 check_solved();
                 break;
             case R.id.menuBtn:
-                Intent openFirstScreen = new Intent(getApplicationContext(), com.example.sudokusolver.MainActivity.class);
-                startActivity(openFirstScreen);
+//                Intent openFirstScreen = new Intent(getApplicationContext(), com.example.sudokusolver.MainActivity.class);
+//                startActivity(openFirstScreen);
                 finish();
                 break;
             case R.id.notesBtn:

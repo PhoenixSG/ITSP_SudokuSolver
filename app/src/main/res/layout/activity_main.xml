@@ -8,26 +8,26 @@
     tools:context=".MainActivity">
 
     <ImageButton
-        android:id="@+id/resumeBtn"
+        android:id="@+id/howtoplayBtn"
         android:layout_width="391dp"
         android:layout_height="75dp"
+        android:layout_marginTop="13dp"
         android:backgroundTint="#00FFFFFF"
         android:scaleType="centerCrop"
-        app:layout_constraintBottom_toTopOf="@+id/newgameBtn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView2"
         app:srcCompat="@drawable/resume_btn" />
 
     <ImageButton
         android:id="@+id/solveBtn"
         android:layout_width="391dp"
         android:layout_height="75dp"
-        android:layout_marginBottom="108dp"
         android:backgroundTint="#00FFFFFF"
         android:scaleType="centerCrop"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/statisticsBtn"
         app:srcCompat="@drawable/settings_btn" />
 
     <ImageButton
@@ -36,9 +36,9 @@
         android:layout_height="75dp"
         android:backgroundTint="#00FFFFFF"
         android:scaleType="centerCrop"
-        app:layout_constraintBottom_toTopOf="@+id/solveBtn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/instructionsBtn"
         app:srcCompat="@drawable/statistics_btn" />
 
     <ImageButton
@@ -47,9 +47,9 @@
         android:layout_height="75dp"
         android:backgroundTint="#00FFFFFF"
         android:scaleType="centerCrop"
-        app:layout_constraintBottom_toTopOf="@+id/statisticsBtn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/newgameBtn"
         app:srcCompat="@drawable/instructions_btn" />
 
     <ImageButton
@@ -58,9 +58,9 @@
         android:layout_height="75dp"
         android:backgroundTint="#00FFFFFF"
         android:scaleType="centerCrop"
-        app:layout_constraintBottom_toTopOf="@+id/instructionsBtn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/howtoplayBtn"
         app:srcCompat="@drawable/newgame_btn" />
 
     <ImageView
